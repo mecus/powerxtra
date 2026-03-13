@@ -1,0 +1,85 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #121212 0%, #000000 100%);
+  font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.auth-container{
+  margin-bottom: 90px;
+  padding-bottom: 90px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  background-color: #000000 !important;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  box-shadow: none !important;
+}
+
+.brand-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #1DB954; /* Spotify Green */
+  margin-bottom: 8px;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.auth-title {
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  margin-bottom: 30px;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: #121212 !important;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 24px !important;
+  border-radius: 500px !important;
+  background-color: #1DB954 !important;
+  color: black !important;
+  font-weight: bold !important;
+  margin-top: 24px !important;
+  letter-spacing: 1px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 32px 0;
+  color: #a7a7a7;
+
+  hr { flex: 1; border: 0; border-top: 1px solid #292929; }
+  span { padding: 0 10px; font-size: 12px; font-weight: bold; }
+}
+
+.toggle-auth {
+  p { color: white; font-weight: bold; margin-bottom: 16px; }
+  button {
+    width: 100%;
+    border-radius: 500px !important;
+    color: #a7a7a7 !important;
+    border: 1px solid #a7a7a7 !important;
+    padding: 20px !important;
+  }
+}

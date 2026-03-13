@@ -1,0 +1,15 @@
+.wave {
+
+  width: 200px;
+  height: 40px;
+
+  opacity: .85;
+  transition: opacity .2s ease;
+
+}
+
+.wave:hover {
+
+  opacity: 1;
+
+}

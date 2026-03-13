@@ -1,0 +1,120 @@
+<div class="album-page">
+
+<div
+class="album-header"
+[style.background]="
+'linear-gradient(to bottom,' + dominantColor + ', #121212)'
+">
+
+<div class="header-content">
+
+
+  <img
+
+    class="album-art"
+    [src]="album().artwork"
+  >
+
+
+<div class="album-info">
+
+<h1>{{album().name}}</h1>
+
+<p class="artist">{{album().artist}}</p>
+
+<div class="meta">
+
+<span>{{album().release_year}}</span>
+<span> • </span>
+<span>{{album().track_counts}} tracks</span>
+
+</div>
+
+<button mat-raised-button color="primary">
+<mat-icon>play_arrow</mat-icon>
+Play Album
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="track-section track-table">
+
+  <table
+  mat-table
+  [dataSource]="tracks"
+  class="track-table">
+
+  <!-- Index -->
+
+  <ng-container matColumnDef="index">
+
+  <th mat-header-cell *matHeaderCellDef>#</th>
+
+  <td mat-cell *matCellDef="let track; let i = index">
+  {{i+1}}
+  </td>
+
+  </ng-container>
+
+
+  <!-- Title -->
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let track">
+    <div class="track-title">
+      {{track.title}}
+    </div>
+    </td>
+  </ng-container>
+
+
+  <!-- Duration -->
+
+  <ng-container matColumnDef="duration">
+
+  <th mat-header-cell *matHeaderCellDef>Length</th>
+
+  <td mat-cell *matCellDef="let track">
+  {{track.duration}}
+  </td>
+
+  </ng-container>
+
+
+  <!-- Play -->
+
+  <ng-container matColumnDef="play">
+
+  <th mat-header-cell *matHeaderCellDef></th>
+
+  <td mat-cell *matCellDef="let track">
+
+  <button
+  mat-icon-button
+  (click)="playTrack(track)"
+  >
+
+  <mat-icon>play_arrow</mat-icon>
+
+  </button>
+
+  </td>
+
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  </table>
+
+</div>
+
+</div>

@@ -1,0 +1,62 @@
+    .sidebar {
+      // width: 240px;
+      // background: #000;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      // height: 90vh;
+    }
+    .live-radio{
+      margin-bottom: 20px;
+      button{
+        color: #1DB954;
+      }
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      // color: #1DB954;
+      color: lightgray;
+      margin-bottom: 30px;
+      img{
+        width: 30px;
+      }
+    }
+
+    nav a {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      color: #b3b3b3;
+      text-decoration: none;
+      margin-bottom: 15px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        // width: 100%;
+        // height: auto;
+        // flex-direction: row;
+        // justify-content: space-around;
+        // padding: 10px 0;
+      }
+
+      nav a {
+        margin-bottom: 10px;
+      }
+    }

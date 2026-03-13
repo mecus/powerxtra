@@ -1,0 +1,11 @@
+  <div class="jingles">
+
+    <button
+      *ngFor="let jingle of jingles"
+      (click)="trigger(jingle.file)"
+      class="jingle-btn"
+    >
+      {{jingle.name}}
+    </button>
+
+  </div>

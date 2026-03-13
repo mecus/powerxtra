@@ -1,0 +1,35 @@
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="https://firebasestorage.googleapis.com/v0/b/allmembers.appspot.com/o/audio%2Fpowerxtra-logo.jpg?alt=media&token=177aeb76-fb36-4c98-9141-d8453cfc3a29" alt="logo">
+        PowerXtra
+      </div>
+      <div class="live-radio">
+        <button (click)="startLiveRadio()" routerLinkActive="active" matButton="outlined"> <mat-icon>cell_tower</mat-icon> Live Radio</button>
+      </div>
+      <nav>
+
+        <a routerLink="/" routerLinkActive="active">
+          <mat-icon>home</mat-icon> Home</a>
+        <a routerLink="/search" routerLinkActive="active">
+          <mat-icon>search</mat-icon> Search</a>
+        <a routerLink="/podcasts" routerLinkActive="active">
+          <mat-icon>podcasts</mat-icon> Podcasts</a>
+        <a routerLink="/lifestyle" routerLinkActive="active">
+          <mat-icon>rss_feed</mat-icon> News</a>
+        <a routerLink="/presenter" routerLinkActive="active">
+          <mat-icon>library_music</mat-icon> Your Library</a>
+        <a routerLink="/analytics" routerLinkActive="active">
+          <mat-icon>favorite</mat-icon> Liked Songs</a>
+        <a routerLink="/analytics" routerLinkActive="active">
+          <mat-icon>playlist_add</mat-icon> Create Playlist</a>
+      </nav>
+
+      <nav>
+        <h3>Admin</h3>
+        <a routerLink="/admin" routerLinkActive="active">Admin Dashboard</a>
+        <a routerLink="/admin/upload_studio" routerLinkActive="active">Upload Studio</a>
+         <a routerLink="/admin/library" routerLinkActive="active">Music Library</a>
+        <a routerLink="/presenter" routerLinkActive="active">Presenter Studio</a>
+        <a routerLink="/analytics" routerLinkActive="active">Analytics</a>
+      </nav>
+    </aside>

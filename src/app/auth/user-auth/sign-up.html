@@ -1,0 +1,50 @@
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <div class="logo-container">
+      <mat-icon class="brand-icon">radio</mat-icon>
+      <!-- <h1 class="brand-name">RadioSkin</h1> -->
+    </div>
+
+    <h2 class="auth-title">
+      {{ isLogin ? 'To continue, log in to PowerXtra' : 'Sign up for free to continue listening.' }}
+    </h2>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <div class="form-fields">
+        <!-- Only shown in Sign Up mode -->
+        <mat-form-field appearance="outline" *ngIf="!isLogin">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="displayName" placeholder="What should we call you?">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email address</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="Email address">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <button mat-flat-button class="submit-btn" [disabled]="!authForm.valid">
+        {{ isLogin ? 'LOG IN' : 'SIGN UP' }}
+      </button>
+    </form>
+
+    <div class="divider">
+      <hr><span>OR</span><hr>
+    </div>
+
+    <div class="toggle-auth">
+      <p>{{ isLogin ? "Don't have an account?" : "Already have an account?" }}</p>
+      <button mat-stroked-button (click)="toggleMode()">
+        {{ isLogin ? 'SIGN UP FOR FREE' : 'LOG IN' }}
+      </button>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,76 @@
+<div class="playlist-builder">
+
+  <!-- TRACK LIBRARY -->
+
+  <div class="library">
+
+    <h3>Track Library</h3>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="trackLibrary"
+      class="track-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+
+      <div
+        *ngFor="let track of trackLibrary"
+        cdkDrag
+        class="track"
+      >
+        <img *ngIf="track.artwork" [src]="track.artwork">
+
+        <div class="track-info">
+          <b>{{track.title}}</b>
+          <span>{{track.artist}}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SHOW SCHEDULE -->
+
+  <div class="schedule">
+
+    <h3>Show Playlist</h3>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="showSchedule"
+      class="schedule-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+
+      <div
+        *ngFor="let track of showSchedule; let i = index"
+        cdkDrag
+        class="schedule-track"
+      >
+
+        <img *ngIf="track.thumbnail" [src]="track.thumbnail">
+
+        <div class="track-info">
+          <b>{{track.title}}</b>
+          <span>{{track.artist}}</span>
+        </div>
+
+        <button (click)="removeTrack(i)">✕</button>
+
+      </div>
+
+    </div>
+
+    <div class="duration">
+
+      Total Duration:
+      {{ getTotalDuration() | number:'1.0-0' }} sec
+
+    </div>
+
+  </div>
+
+</div>

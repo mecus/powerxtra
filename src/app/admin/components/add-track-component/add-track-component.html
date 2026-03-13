@@ -1,0 +1,60 @@
+<div class="spotify-dialog-container">
+  <h2 mat-dialog-title>Add to Album</h2>
+
+  <mat-dialog-content>
+    <div class="selection-summary">
+      <p>Adding <strong>{{ selectedTracks.length }}</strong> tracks to an existing album.</p>
+    </div>
+
+    <!-- Album Search -->
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search for an album...</mat-label>
+      <input type="text" matInput [formControl]="albumControl" [matAutocomplete]="auto">
+      <mat-icon matPrefix>search</mat-icon>
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+        @for (album of filteredAlbums$ | async; track album.id) {
+          <mat-option [value]="album">
+            <div class="album-option">
+              <img [src]="album.artwork" alt="cover">
+              <div class="album-info">
+                <span class="name">{{ album.name }}</span>
+                <span class="artist">{{ album.artist }}</span>
+              </div>
+            </div>
+          </mat-option>
+        } @empty {
+          <mat-option disabled>No albums found</mat-option>
+        }
+        <!-- <mat-option *ngFor="let album of filteredAlbums$ | async" [value]="album">
+          <div class="album-option">
+            <img [src]="album.cover" alt="cover">
+            <div class="album-info">
+              <span class="name">{{ album.name }}</span>
+              <span class="artist">{{ album.artist }}</span>
+            </div>
+          </div>
+        </mat-option> -->
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Selected Album Preview -->
+    @if (selectedAlbum()) {
+      <div class="selected-preview">
+        <mat-icon>check_circle</mat-icon>
+        <span>Selected: <strong>{{ selectedAlbum().name }}</strong></span>
+      </div>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()" class="cancel-btn">CANCEL</button>
+    <button mat-flat-button
+            [disabled]="!selectedAlbum()"
+            (click)="confirm()"
+            class="add-btn">
+      ADD TO ALBUM
+    </button>
+  </mat-dialog-actions>
+</div>
+

@@ -1,0 +1,76 @@
+<div class="album-page">
+
+  <div class="header form-field-round">
+
+  <h2>Albums | Playlist | EP | Selections</h2>
+
+  <mat-form-field appearance="outline" class="search">
+  <mat-label>Search albums</mat-label>
+    <input
+    matInput
+    [(ngModel)]="search"
+    (input)="searchAlbums()"
+    placeholder="Search by album, artist or genre">
+  </mat-form-field>
+  <button [matMenuTriggerFor]="createMenu" matButton="outlined">Create</button>
+  <mat-menu #createMenu="matMenu">
+    <button (click)="createAlbum('album')" mat-menu-item>Create Album</button>
+    <button (click)="createAlbum('playlist')" mat-menu-item>Create Playlist</button>
+    <button (click)="createAlbum('selection')" mat-menu-item>Create Selection</button>
+    <button (click)="createAlbum('ep')" mat-menu-item>Create EP</button>
+    <button (click)="createAlbum('compilation')" mat-menu-item>Create Compilation</button>
+  </mat-menu>
+</div>
+
+
+<div class="album-grid">
+
+  @for(album of filteredAlbums; track album){
+
+
+  <mat-card
+    class="album-card"
+    >
+
+  <div class="artwork">
+  @if(album.artwork){
+    <img [src]="album.artwork">
+  }
+  <div class="overlay">
+
+  <button [routerLink]="['/admin/albums/details/', album._id ]" mat-icon-button color="primary">
+  <mat-icon>visibility</mat-icon>
+  </button>
+
+  <button mat-icon-button color="accent">
+  <mat-icon>edit</mat-icon>
+  </button>
+
+  <button mat-icon-button color="warn" (click)="deleteAlbum(album)">
+  <mat-icon>delete</mat-icon>
+  </button>
+
+  </div>
+
+  </div>
+
+  <div class="album-info" [routerLink]="['/admin/albums/details/', album._id ]">
+
+  <h3>{{album.name}}</h3>
+
+  <p>{{album.artist}}</p>
+
+  <span class="meta">
+
+  {{album.release_year}} • {{album.track_counts}} tracks
+
+  </span>
+
+  </div>
+
+  </mat-card>
+}
+
+</div>
+
+</div>

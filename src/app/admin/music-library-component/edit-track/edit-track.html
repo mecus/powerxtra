@@ -1,0 +1,116 @@
+<div class="edit-container">
+  <header mat-dialog-title>
+    <mat-icon>edit_note</mat-icon>
+    <span>Edit Track Details</span>
+  </header>
+
+  <mat-dialog-content>
+    <form [formGroup]="trackForm" class="editor-grid general-form-field mat-select-library">
+
+      <!-- Artwork Sidebar -->
+      <div class="artwork-section">
+        <div class="art-preview">
+          <img [src]="previewUrl()" alt="Track Artwork">
+          <div class="overlay"><mat-icon>photo_camera</mat-icon></div>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Artwork URL</mat-label>
+          <input matInput formControlName="artwork" (input)="previewUrl.set(trackForm.value.artwork)">
+        </mat-form-field>
+        <div class="meta-chip">Bitrate: {{ data.bitrate }} kbps</div>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="fields-section">
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Track Title</mat-label>
+            <input matInput formControlName="title">
+          </mat-form-field>
+        </div>
+
+        <div class="row duo">
+          <mat-form-field appearance="outline">
+            <mat-label>Artist</mat-label>
+            <input matInput formControlName="artist">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Album</mat-label>
+            <input matInput formControlName="album">
+          </mat-form-field>
+        </div>
+
+        <div class="row trio">
+          <mat-form-field appearance="outline">
+            <mat-label>Genre</mat-label>
+            <mat-select formControlName="genre">
+              @for(gen of genres(); track gen){
+                <mat-option [value]="gen">{{gen}}</mat-option>
+              }
+            </mat-select>
+
+            <!-- <input matInput formControlName="genre"> -->
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              @for(cat of categorys(); track cat){
+                <mat-option [value]="cat">{{cat}}</mat-option>
+              }
+              <!-- <mat-option value="music">Music</mat-option>
+              <mat-option value="jingle">Jingle</mat-option>
+              <mat-option value="commercial">Commercial</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <input matInput type="number" formControlName="release_year">
+          </mat-form-field>
+        </div>
+        <!-- Inside .fields-section -->
+        <div class="row duo">
+          <!-- Track Type Selector -->
+          <mat-form-field appearance="outline">
+            <mat-label>Content Type</mat-label>
+            <mat-select formControlName="object">
+              @for(type of objectType(); track type){
+                <mat-option style="text-transform: capitalize;" [value]="type">{{type}}</mat-option>
+              }
+
+              <!-- <mat-option value="jingle">Jingle / ID</mat-option>
+              <mat-option value="promo">Promo / Ad</mat-option>
+              <mat-option value="podcast">Podcast Episode</mat-option> -->
+            </mat-select>
+            <mat-icon matPrefix>category</mat-icon>
+          </mat-form-field>
+
+          <!-- Release Date Picker -->
+          <mat-form-field appearance="outline">
+            <mat-label>Release Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="release_date">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+<!-- Rest of the form remains same -->
+
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tags (comma separated)</mat-label>
+          <input matInput formControlName="tags" placeholder="lofi, chill, synthwave">
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()" class="cancel-btn">Discard</button>
+    <button mat-flat-button color="primary" (click)="onSave()" class="save-btn" [disabled]="!trackForm.valid">
+      Save Changes
+    </button>
+  </mat-dialog-actions>
+</div>
+

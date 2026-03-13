@@ -1,0 +1,48 @@
+<div class="upload-container">
+
+  <div
+    class="drop-zone"
+    (drop)="onDrop($event)"
+    (dragover)="onDragOver($event)"
+  >
+
+    <input
+      type="file"
+      accept=".mp3,.wav"
+      (change)="onFileInput($event)"
+      hidden
+      #fileInput
+    />
+
+    <button (click)="fileInput.click()">
+      Upload Audio
+    </button>
+
+    <p>Drag & Drop MP3 / WAV</p>
+
+  </div>
+
+  @if(loading){
+    <div class="loading">
+      Extracting metadata...
+    </div>
+  }
+
+  @if(metadata) {
+    <div class="metadata">
+      @if(metadata.artwork){
+        <img [src]="metadata.artwork"/>
+      }
+      <div class="info">
+        <p><b>Title:</b> {{metadata.title}}</p>
+        <p><b>Artist:</b> {{metadata.artist}}</p>
+        <p><b>Album:</b> {{metadata.album}}</p>
+        <p><b>Year:</b> {{metadata.year}}</p>
+        <p><b>Duration:</b> {{metadata.duration | number:'1.0-0'}} sec</p>
+      </div>
+
+    </div>
+  }
+
+
+</div>

@@ -1,0 +1,105 @@
+powerxtra-radio/
+│
+├── README.md
+├── package.json
+├── angular.json
+├── tsconfig.json
+├── .gitignore
+│
+├── src/
+│
+│   ├── main.ts
+│   ├── index.html
+│   ├── styles.scss
+│   │
+│   ├── environments/
+│   │   ├── environment.ts
+│   │   └── environment.prod.ts
+│   │
+│   ├── app/
+│   │
+│   │   ├── app.component.ts
+│   │   ├── app.routes.ts
+│   │
+│   │   ├── core/
+│   │   │
+│   │   ├── services/
+│   │   │   ├── radio.service.ts
+│   │   │   ├── crossfade.service.ts
+│   │   │   ├── stream.service.ts
+│   │   │   └── analytics.service.ts
+│   │   │
+│   │   └── models/
+│   │       ├── track.model.ts
+│   │       ├── playlist.model.ts
+│   │       └── listener.model.ts
+│   │
+│   │
+│   │   ├── store/
+│   │   │   ├── radio.actions.ts
+│   │   │   ├── radio.reducer.ts
+│   │   │   ├── radio.effects.ts
+│   │   │   └── radio.selectors.ts
+│   │
+│   │
+│   │   ├── shared/
+│   │   │
+│   │   ├── components/
+│   │   │
+│   │   │   ├── player/
+│   │   │   │   ├── player.component.ts
+│   │   │   │   ├── player.component.html
+│   │   │   │   └── player.component.scss
+│   │   │   │
+│   │   │   ├── sidebar/
+│   │   │   │   ├── sidebar.component.ts
+│   │   │   │   ├── sidebar.component.html
+│   │   │   │   └── sidebar.component.scss
+│   │   │   │
+│   │   │   ├── waveform/
+│   │   │   │   ├── waveform.component.ts
+│   │   │   │   └── waveform.component.scss
+│   │
+│   │
+│   │   ├── features/
+│   │
+│   │   │   ├── home/
+│   │   │   │   ├── home.component.ts
+│   │   │   │   └── home.component.html
+│   │   │   │
+│   │   │   ├── presenter/
+│   │   │   │
+│   │   │   │   ├── presenter.component.ts
+│   │   │   │   ├── presenter.component.html
+│   │   │   │
+│   │   │   │   ├── playlist-builder/
+│   │   │   │   │   ├── playlist-builder.component.ts
+│   │   │   │   │   ├── playlist-builder.component.html
+│   │   │   │   │   └── playlist-builder.component.scss
+│   │   │   │
+│   │   │   │   ├── audio-upload/
+│   │   │   │   │   ├── audio-upload.component.ts
+│   │   │   │   │   ├── audio-upload.component.html
+│   │   │   │   │   └── audio-upload.component.scss
+│   │   │   │
+│   │   │   │   ├── jingles/
+│   │   │   │   │   ├── jingle-panel.component.ts
+│   │   │   │   │   └── jingle.service.ts
+│   │   │   │
+│   │   │   │
+│   │   │   ├── analytics/
+│   │   │   │   ├── analytics.component.ts
+│   │   │   │   ├── analytics.component.html
+│   │   │   │   └── analytics.component.scss
+│   │
+│   │
+│   │   ├── utils/
+│   │   │   └── metadata.util.ts
+│   │
+│   │
+│   │   └── assets/
+│   │       ├── jingles/
+│   │       └── images/
+│
+└── tools/
+    └── scripts/

@@ -1,0 +1,66 @@
+.spotify-dialog-container {
+  background: #121212;
+  color: white;
+  padding: 10px;
+  border: 2px solid #1DB954;
+  overflow: hidden;
+  filter: drop-shadow(0 0 5px #1db954); // Glowing effect
+  h2 {
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: -1px;
+    color: white;
+  }
+}
+
+.selection-summary {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #1DB954;
+  p { margin: 0; color: #b3b3b3; }
+}
+
+.search-field {
+  width: 100%;
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    background-color: #282828 !important;
+  }
+  ::ng-deep .mat-mdc-form-field-label { color: #b3b3b3 !important; }
+}
+
+.album-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  img { width: 32px; height: 32px; border-radius: 4px; }
+  .album-info {
+    display: flex;
+    flex-direction: column;
+    .name { font-weight: bold; line-height: 1.2; }
+    .artist { font-size: 12px; color: #b3b3b3; }
+  }
+}
+
+.selected-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  color: #1DB954;
+  font-size: 14px;
+}
+
+.add-btn {
+  background-color: #1DB954 !important;
+  color: black !important;
+  font-weight: 900 !important;
+  border-radius: 500px !important;
+  padding: 0 32px !important;
+}
+
+.cancel-btn {
+  color: #b3b3b3 !important;
+  font-weight: 700;
+}

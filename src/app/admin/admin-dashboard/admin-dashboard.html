@@ -1,0 +1,26 @@
+<div class="admin-container">
+  <header class="admin-header">
+    <div class="badge">ADMIN PANEL</div>
+    <h1>Welcome back, {{currentUser?.displayName}}</h1>
+    <p>Select a module to manage your PowerXtra ecosystem.</p>
+  </header>
+
+  <div class="link-grid">
+    <mat-card
+      *ngFor="let link of adminLinks"
+      [routerLink]="link.path"
+      class="nav-card">
+      <mat-card-content>
+        <div class="icon-wrapper" [style.color]="link.color">
+          <mat-icon>{{ link.icon }}</mat-icon>
+        </div>
+        <div class="card-text">
+          <h3>{{ link.title }}</h3>
+          <p>{{ link.description }}</p>
+        </div>
+        <mat-icon class="arrow">chevron_right</mat-icon>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

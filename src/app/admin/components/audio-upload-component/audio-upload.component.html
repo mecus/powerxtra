@@ -1,0 +1,125 @@
+<mat-card class="upload-card">
+
+<div class="drop-zone"
+    [class.dragging]="dragging"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)"
+>
+
+  <input type="file"
+  multiple
+  accept="audio/*"
+  (change)="handleFiles($any($event.target).files)">
+
+  <p>Drag or select tracks</p>
+
+</div>
+
+@for(t of tracks().songs; track t){
+  <div class="track">
+
+    @if(t.artwork) {
+      <img [src]="t.artwork" class="art">
+    }
+
+
+  <div class="meta">
+
+  <h3>{{t.title}}</h3>
+
+  <p>{{t.artist}}</p>
+
+  <p>
+
+  {{t.duration | number:'1.0-0'}} sec
+  • {{t.bitrate}} BPM
+
+  </p>
+
+  </div>
+
+  <audio controls [src]="t.preview"></audio>
+
+  <mat-progress-bar
+  mode="determinate"
+  [value]="t.progress">
+  </mat-progress-bar>
+
+  </div>
+}
+
+
+  <button [disabled]="disableButton()" mat-raised-button color="accent" (click)="uploadAll()">
+  Upload Tracks
+  </button>
+
+</mat-card>
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card class="upload-card">
+
+  <div
+    class="drop-zone"
+    [class.dragging]="dragging"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)"
+  >
+
+    <mat-icon>cloud_upload</mat-icon>
+
+    <p>Drag & Drop Audio Tracks</p>
+
+    <span>or</span>
+
+    <button mat-raised-button color="primary">
+      Select Files
+      <input type="file" multiple accept="audio/*" (change)="onFileSelect($event)" />
+    </button>
+
+  </div>
+
+  <div class="file-list" *ngIf="files.length">
+
+    <div class="file-row" *ngFor="let f of files">
+
+      <div class="file-info">
+
+        <mat-icon>music_note</mat-icon>
+
+        <span>{{f.file.name}}</span>
+
+      </div>
+      @if(f.progress > 0){
+        <mat-progress-bar
+          mode="determinate"
+          [value]="f.progress">
+        </mat-progress-bar>
+      }
+
+
+    </div>
+
+  </div>
+
+  @if(files.length) {
+  <button
+    mat-raised-button
+    color="accent"
+    class="upload-btn"
+    (click)="uploadAll()"
+  >
+    Upload Tracks
+  </button>
+  }
+
+</mat-card> -->

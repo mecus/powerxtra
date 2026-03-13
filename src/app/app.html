@@ -1,0 +1,60 @@
+
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<mat-drawer-container class="layout">
+  <mat-drawer class="sidebar" mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content class="main">
+    <div class="top-nav">
+      <div class="left-nav">
+        <button (click)="navigateBack()" mat-icon-button><mat-icon>arrow_back</mat-icon></button>
+      </div>
+      <nav class="nav">
+        @if(isLogin()){
+          <button [matMenuTriggerFor]="userMenu" matButton="outlined">
+            <mat-icon>person</mat-icon>
+            @if(user()){
+              {{user().displayName}}
+            }
+          </button>
+        }@else {
+          <button routerLink="/auth" matButton="outlined">
+            <mat-icon>person</mat-icon> Login
+          </button>
+        }
+      </nav>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logOut()" >
+          <mat-icon>power_off</mat-icon> Sign Out</button>
+      </mat-menu>
+    </div>
+    <div class="outlet">
+     <router-outlet />
+    </div>
+     <div class="player-margin">
+      <!-- <p>This is the player margin</p> -->
+     </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+  <div class="player">
+    <!-- <app-player></app-player> -->
+    <radio-player></radio-player>
+  </div>
+
+  <!-- <div class="layout">
+    <app-sidebar></app-sidebar>
+    <main>
+     <router-outlet />
+    </main>
+    <app-player></app-player>
+  </div> -->
+
+

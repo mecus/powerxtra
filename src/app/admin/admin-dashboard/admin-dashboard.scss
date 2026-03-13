@@ -1,0 +1,83 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #1a1a1a 0%, #000000 100%);
+  padding: 40px 20px;
+  color: white;
+  font-family: 'Circular', sans-serif;
+}
+
+.admin-header {
+  max-width: 1100px;
+  margin: 0 auto 50px;
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    background: #1DB954;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  h1 { font-size: 48px; font-weight: 900; margin: 0; letter-spacing: -2px; }
+  p { color: #b3b3b3; font-size: 18px; margin-top: 10px; }
+}
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.nav-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer;
+  border: 1px solid transparent !important;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-5px);
+    border-color: rgba(29, 185, 84, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+    .arrow { opacity: 1; transform: translateX(0); }
+  }
+
+  mat-card-content {
+    display: flex;
+    align-items: center;
+    padding: 30px !important;
+  }
+}
+
+.icon-wrapper {
+  background: rgba(0,0,0,0.3);
+  padding: 15px;
+  border-radius: 10px;
+  margin-right: 20px;
+  mat-icon { font-size: 32px; width: 32px; height: 32px; }
+}
+
+.card-text {
+  flex: 1;
+  h3 { font-size: 20px; margin: 0 0 5px; font-weight: 700; }
+  p { color: #b3b3b3; font-size: 14px; margin: 0; line-height: 1.4; }
+}
+
+.arrow {
+  color: #1DB954;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}

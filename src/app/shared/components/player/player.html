@@ -1,0 +1,18 @@
+  <footer class="player">
+    <div class="info">
+      <strong>PowerXtra Live</strong>
+      <span>Afrobeat • Culture • Lifestyle</span>
+    </div>
+
+    <div class="controls">
+      <button (click)="radio.toggle()">
+        {{ radio.isPlaying() ? '⏸' : '▶' }}
+      </button>
+
+      <input type="range" min="0" max="1" step="0.01"
+        [value]="radio.volume()"
+        (input)="radio.setVolume($any($event.target).value)" />
+    </div>
+
+    <canvas #waveCanvas></canvas>
+  </footer>

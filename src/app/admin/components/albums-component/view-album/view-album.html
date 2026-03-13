@@ -1,0 +1,114 @@
+
+@if (isLoading()) {
+  <!-- SKELETON UI -->
+  <div class="album-page skeleton-page">
+    <header class="album-header">
+      <div class="cover-art skeleton shimmer"></div>
+      <div class="info">
+        <div class="skeleton shimmer type-tag"></div>
+        <div class="skeleton shimmer title-line"></div>
+        <div class="skeleton shimmer subtitle-line"></div>
+      </div>
+    </header>
+
+    <div class="tracklist-container">
+      <div class="skeleton-table">
+        <div class="skeleton-row header-row shimmer"></div>
+        @for (i of [1,2,3,4,5]; track i) {
+          <div class="skeleton-row track-row">
+            <div class="skeleton shimmer cell-sm"></div>
+            <div class="skeleton shimmer cell-lg"></div>
+            <div class="skeleton shimmer cell-md"></div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+
+  <!-- YOUR ORIGINAL CONTENT HERE -->
+
+<div class="album-page" [style.background]="'linear-gradient(to bottom, ' + dominantColor() + ' 0%, #121212 40%)'">
+  <header class="album-header">
+    <img #albumArt [src]="album().artwork" (load)="updateBackground()" crossorigin="anonymous" class="cover-art">
+    <div class="info">
+      <span class="type">{{album().object}}</span>
+      <h1>{{ album().name }}</h1>
+      <p><strong>{{ album().artist }}</strong> • {{ album().tracks.length }} songs <span>- Duration: {{ formatTime(albumDuration()) }}</span> </p>
+    </div>
+  </header>
+
+  <div class="tracklist-container">
+    <table mat-table [dataSource]="album().tracks" class="dark-table">
+      <!-- Play Column -->
+      <ng-container matColumnDef="play">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell *matCellDef="let track; let i = index">
+          <div class="track-index">
+            @if (activeTrackId() === track._id && isPlaying()) {
+              <div class="equalizer">
+                <span></span><span></span><span></span>
+              </div>
+            } @else {
+              <span class="number">{{ i + 1 }}</span>
+            }
+            <button mat-icon-button (click)="togglePlay(track)" class="play-btn">
+              <mat-icon>{{ activeTrackId() === track._id && isPlaying() ? 'pause' : 'play_arrow' }}</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let track" [class.active-text]="activeTrackId() === track._id">
+          {{ track.title }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef> Time </th>
+        <td mat-cell *matCellDef="let track"> {{ formatTime(track.duration )}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let track">
+          <button class="delBtn" matTooltip="Remove Track" (click)="removeTrack(track)" matIconButton><mat-icon>delete</mat-icon></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['play', 'title', 'duration', 'delete' ]"></tr>
+      <tr class="table-row" mat-row *matRowDef="let row; columns: ['play', 'title', 'duration', 'delete']"></tr>
+    </table>
+  </div>
+</div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

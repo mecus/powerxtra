@@ -1,0 +1,32 @@
+<div class="analytics">
+
+<h2>Listener Analytics</h2>
+
+<div class="stats">
+
+<div class="card">
+<h3>Live Listeners</h3>
+<p>{{stats?.currentListeners}}</p>
+</div>
+
+<div class="card">
+<h3>Peak Listeners</h3>
+<p>{{stats?.peakListeners}}</p>
+</div>
+
+<div class="card">
+<h3>Average</h3>
+<p>{{stats?.averageListeners}}</p>
+</div>
+
+</div>
+
+<h3>Listener Locations</h3>
+
+<ul>
+<li *ngFor="let g of geo">
+{{g.country}} - {{g.listeners}}
+</li>
+</ul>
+
+</div>

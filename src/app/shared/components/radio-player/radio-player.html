@@ -1,0 +1,55 @@
+<div class="spotify-footer">
+  <div class="player-container">
+    <!-- Left: Track Details -->
+    <div class="section track-section">
+      <img [src]="nowPlaying().artwork" alt="Art" class="mini-thumbnail">
+
+      <!-- <div class="visualizer-container">
+
+        <canvas #visualizerCanvas width="100" height="40"></canvas>
+      </div> -->
+
+      <div class="text-meta">
+        <div class="track-name">{{ nowPlaying().title }}</div>
+        <div class="artist-name">{{ nowPlaying().artist }}</div>
+      </div>
+      <button mat-icon-button (click)="toggleLike()" [class.liked]="isLiked">
+        <mat-icon>{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
+      </button>
+    </div>
+
+    <!-- Center: Playback Controls & Progress -->
+    <div class="section control-section">
+      <div class="playback-buttons">
+        <button [class.disable]="isLive()" [disabled]="isLive()" mat-icon-button class="small-btn"><mat-icon>shuffle</mat-icon></button>
+        <button [class.disable]="isLive()" [disabled]="isLive()" mat-icon-button (click)="prevTrack()"><mat-icon>skip_previous</mat-icon></button>
+        <button mat-icon-button (click)="radioService.toggle()" class="play-trigger">
+          <mat-icon>{{ isPlay() ? 'pause_circle' : 'play_circle' }}</mat-icon>
+        </button>
+        <button [class.disable]="isLive()" [disabled]="isLive()" mat-icon-button (click)="nextTrack()"><mat-icon>skip_next</mat-icon></button>
+        <button [class.disable]="isLive()" [disabled]="isLive()" mat-icon-button class="small-btn"><mat-icon>repeat</mat-icon></button>
+      </div>
+
+      <div class="progress-bar-wrapper track-progress">
+        <!-- <span class="time">1:24</span> -->
+        <span class="time">{{formatTime(currentTimeProgress())}}</span>
+        <mat-slider [class.disable]="isLive()" [min]="0.0" [max]="formatTime(duration())" [step]="0" class="progress-slider">
+          <input (valueChange)="onSeek($event)" matInput matSliderThumb [(ngModel)]="timeLine">
+        </mat-slider>
+        <!-- <span class="time">3:45</span> -->
+         <span class="time">{{ formatTime(duration()) }}</span>
+      </div>
+    </div>
+
+    <!-- Right: Volume & Extra -->
+    <div class="section volume-section track-progress">
+      <button mat-icon-button><mat-icon>playlist_play</mat-icon></button>
+     <button matIconButton> <mat-icon (click)="toggleVolume()" class="vol-icon">
+        {{isMuted? 'volume_down':'volume_up'}}
+      </mat-icon></button>
+      <mat-slider min="0" max="1" step="0.05" class="volume-slider">
+        <input (valueChange)="updateVolume($event)" matSliderThumb [(ngModel)]="volume">
+      </mat-slider>
+    </div>
+  </div>
+</div>

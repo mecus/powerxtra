@@ -1,0 +1,101 @@
+<div class="details-container">
+  <header class="header">
+    <div class="title-group">
+      <mat-icon>info</mat-icon>
+      <h1>Track Metadata</h1>
+    </div>
+    <span class="status-badge" [attr.data-status]="statusClass()">
+      {{ data.status || 'PENDING' }}
+    </span>
+  </header>
+
+  <mat-dialog-content>
+    <div class="details-grid">
+
+      <!-- Sidebar: Artwork & File Info -->
+      <aside class="sidebar">
+        <img [src]="data.artwork || 'assets/placeholder.png'" class="art-large">
+
+        <div class="file-stats">
+          <div class="stat-item">
+            <span class="label">Duration</span>
+            <span class="value">{{ formatTime(data.duration) || '0:00' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Bitrate</span>
+            <span class="value">{{ data.bitrate }} kbps</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Type</span>
+            <span class="value uppercase">{{ data.object }}</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Info Area -->
+      <main class="info-area">
+
+          <h2 class="track-title">{{ data.title }}</h2>
+          <p class="track-artist">{{ data.artist }} — {{ data.album }}</p>
+        <!-- </section> -->
+
+        <mat-divider></mat-divider>
+
+        <div class="metadata-grid">
+          <div class="meta-box">
+            <label>Genre</label>
+            <p>{{ data.genre || 'Unspecified' }}</p>
+          </div>
+          <div class="meta-box">
+            <label>Release Date</label>
+            <p>{{ data.release_date | date:'mediumDate' }} ({{ data.release_year }})</p>
+          </div>
+          <div class="meta-box">
+            <label>Uploaded By</label>
+            <p>{{ data.uploadedBy }}</p>
+          </div>
+          <div class="meta-box">
+            <label>Upload Date</label>
+            <p>{{ data.upload_date | date:'short' }}</p>
+          </div>
+        </div>
+
+        <section class="tags-section">
+          <label>Tags</label>
+          <div class="tag-cloud">
+            @for (tag of getTags(data.tags); track tag) {
+              <span class="tag-pill">#{{ tag }}</span>
+            } @empty {
+              <span class="no-tags">No tags assigned</span>
+            }
+          </div>
+        </section>
+
+
+      <div class="preview-player">
+        <div class="player-controls">
+          <button mat-mini-fab color="primary" (click)="togglePreview()">
+            <mat-icon>{{ isPlaying() ? 'pause' : 'play_arrow' }}</mat-icon>
+          </button>
+          <span class="time-label">{{ formatTime(currentTime()) }}</span>
+
+          <!-- Modern Angular Material Slider -->
+          <mat-slider min="0" [max]="duration()" step="1" class="seek-slider">
+            <input matSliderThumb [value]="currentTime()" (input)="onSeek($event)">
+          </mat-slider>
+
+          <span class="time-label">{{ formatTime(duration()) }}</span>
+        </div>
+        <p class="preview-hint">Audio Preview ({{ data.bitrate }}kbps)</p>
+      </div>
+
+      </main>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button (click)="close()">CLOSE</button>
+    <button mat-flat-button (click)="editTrack()" color="primary" class="edit-shortcut">EDIT TRACK</button>
+  </mat-dialog-actions>
+</div>
+

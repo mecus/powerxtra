@@ -1,0 +1,147 @@
+.details-container {
+  background: #121212;
+  color: white;
+  font-family: 'Circular', sans-serif;
+  border: 1px solid #1DB954;
+  overflow: hidden;
+  filter: drop-shadow(0 0 5px #1db954); // Glowing effect
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    align-items: center;
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      mat-icon { color: #1DB954; }
+      h1 { margin: 0; font-size: 20px; font-weight: 700; }
+    }
+  }
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  padding-bottom: 20px;
+}
+
+.art-large {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin-bottom: 20px;
+}
+
+.file-stats {
+  background: #181818;
+  padding: 16px;
+  border-radius: 8px;
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    .label { color: #b3b3b3; font-size: 12px; }
+    .value { font-weight: bold; font-size: 13px; color: gray; }
+  }
+}
+
+.info-area {
+  .track-title { font-size: 32px; line-height: 0.9; font-weight: 900; margin: 0; letter-spacing: -1px; }
+  .track-artist { color: #b3b3b3; font-size: 18px; margin-bottom: 20px; }
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+
+  .meta-box {
+    label { color: #b3b3b3; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+    p { margin: 4px 0 0; font-size: 15px; color: gray; }
+  }
+}
+
+.tag-pill {
+  display: inline-block;
+  background: #282828;
+  padding: 4px 12px;
+  border-radius: 500px;
+  font-size: 12px;
+  margin: 0 8px 8px 0;
+  color: #1DB954;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  &[data-status="active"] { background: #1DB954; color: black; }
+  &[data-status="pending"] { background: #f1c40f; color: black; }
+}
+
+.edit-shortcut {
+  background: #1DB954 !important;
+  color: black !important;
+  font-weight: bold;
+}
+.uppercase{
+  text-transform: uppercase;
+}
+
+
+.preview-player {
+  background: #181818;
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 20px;
+
+  .player-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .time-label {
+    font-size: 11px;
+    color: #b3b3b3;
+    font-family: monospace;
+    min-width: 35px;
+  }
+
+  .preview-hint {
+    font-size: 10px;
+    color: #555;
+    text-align: center;
+    margin: 8px 0 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+/* Custom Spotify-Green Slider Styling */
+.seek-slider {
+  flex: 1;
+  width: 100%;
+
+  ::ng-deep .mdc-slider__track--inactive {
+    background-color: #4d4d4d !important;
+  }
+
+  ::ng-deep .mdc-slider__track--active_fill {
+    border-color: #1DB954 !important;
+  }
+
+  ::ng-deep .mdc-slider__thumb-knob {
+    background-color: #fff !important;
+    width: 12px;
+    height: 12px;
+  }
+}

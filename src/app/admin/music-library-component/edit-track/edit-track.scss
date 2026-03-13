@@ -1,0 +1,74 @@
+.edit-container {
+  background: #181818;
+  color: white;
+  padding: 10px;
+  border: 1px solid #1DB954;
+  overflow: hidden;
+  filter: drop-shadow(0 0 5px #1db954); // Glowing effect
+  // width: 900px;
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    font-size: 22px;
+    color: #1DB954;
+    margin-bottom: 20px;
+  }
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 30px;
+}
+
+.artwork-section {
+  text-align: center;
+  .art-preview {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background: #282828;
+    img { width: 100%; height: 100%; object-fit: cover; }
+    .overlay {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.5);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: 0.3s; cursor: pointer;
+    }
+    &:hover .overlay { opacity: 1; }
+  }
+}
+
+.fields-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row { width: 100%; display: flex; gap: 15px; mat-form-field { flex: 1; } }
+.full-width { width: 100%; }
+
+.meta-chip {
+  font-size: 11px;
+  background: #333;
+  color: #b3b3b3;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper { background: #282828 !important; }
+
+.save-btn {
+  background-color: #1DB954 !important;
+  color: black !important;
+  border-radius: 500px !important;
+  font-weight: bold !important;
+  padding: 0 24px !important;
+}
+
+.cancel-btn { color: #b3b3b3 !important; }

@@ -1,0 +1,57 @@
+.playlist-builder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  color: white;
+  margin-top: 20px;
+}
+
+.library,
+.schedule {
+  background: #181818;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.track,
+.schedule-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #242424;
+  border-radius: 8px;
+  cursor: grab;
+}
+
+.track img,
+.schedule-track img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.track-info {
+  flex: 1;
+}
+
+button {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.duration {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #1db954;
+}
+
+@media (max-width: 768px) {
+  .playlist-builder {
+    grid-template-columns: 1fr;
+  }
+}

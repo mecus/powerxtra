@@ -1,0 +1,123 @@
+<div class="radio-dashboard">
+  <!-- Header / Controls -->
+   <!-- Fixed Header -->
+  <header class="autodj-banner" [class.active]="isAutoDjActive()">
+    <div class="status-info">
+      <mat-icon class="pulse-icon">radio</mat-icon>
+      <div class="text-group">
+        <h1>AutoDJ System</h1>
+        <p>{{ isAutoDjActive() ? 'LIVE ON AIR' : 'SYSTEM STANDBY' }} <span style="font-size: 12px;">( {{radioState().listeners}} Listening )</span> </p>
+      </div>
+    </div>
+    <div class="controls">
+      <button mat-fab extended color="warn" (click)="addJingle()" class="action-btn">
+        <mat-icon>flash_on</mat-icon> QUICK JINGLE
+      </button>
+      <button mat-fab extended [color]="isAutoDjActive() ? 'accent' : 'primary'" (click)="toggleAutoDj()" class="action-btn">
+        <mat-icon>{{ isAutoDjActive() ? 'stop' : 'play_arrow' }}</mat-icon>
+        {{ isAutoDjActive() ? 'STOP' : 'START' }}
+      </button>
+    </div>
+  </header>
+
+
+  <div class="main-grid" cdkDropListGroup>
+
+    <!-- Library Pane -->
+     <!-- Library Pane -->
+  <section class="pane">
+    <div class="pane-header">
+      <h2><mat-icon>library_music</mat-icon> Media Library</h2>
+
+      <!-- New Search Field -->
+      <div class="search-box">
+        <mat-icon>search</mat-icon>
+        <input
+          type="text"
+          placeholder="Search tracks or artists..."
+          (input)="onSearch($event)"
+          [value]="searchQuery()">
+        @if (searchQuery()) {
+          <button class="clear-btn" (click)="searchQuery.set('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+
+    <div
+        id="libraryList"
+        cdkDropList
+        [cdkDropListData]="filteredLibrary()"
+        class="list-container"
+        (cdkDropListDropped)="drop($event)">
+
+      @for (item of filteredLibrary(); track item._id) {
+        <div class="track-item" cdkDrag>
+          <mat-icon class="drag-handle">drag_indicator</mat-icon>
+          <div class="info">
+            <span class="title">{{ item.title }}</span>
+            <span class="artist">{{ item.artist }}</span>
+          </div>
+          <button mat-icon-button (click)="previewTrack(item)" matTooltip="Preview">
+            <mat-icon [class.play]="currentTrack()?.title == item?.title" >headphones</mat-icon>
+          </button>
+        </div>
+      } @empty {
+        <div class="empty-search">
+          <mat-icon>search_off</mat-icon>
+          <p>No tracks match "{{ searchQuery() }}"</p>
+        </div>
+      }
+    </div>
+  </section>
+
+    <!-- <section class="pane">
+      <h2><mat-icon>library_music</mat-icon> Media Library</h2>
+      <div cdkDropList [cdkDropListData]="library()" class="list-container" (cdkDropListDropped)="drop($event)">
+        @for (item of library(); track item.id) {
+          <div class="track-item" cdkDrag>
+            <mat-icon class="drag-handle">drag_indicator</mat-icon>
+            <div class="info">
+              <span class="title">{{ item.title }}</span>
+              <span class="artist">{{ item.artist }}</span>
+            </div>
+            <button mat-icon-button (click)="previewTrack(item)" matTooltip="Preview">
+              <mat-icon>headphones</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+    </section> -->
+
+    <!-- Queue Pane -->
+    <section class="pane active-pane">
+      <div class="queue-header">
+      <h2><mat-icon>queue_music</mat-icon> Scheduled Queue </h2>
+        <button (click)="refreshQueue()"  matIconButton><mat-icon [class.spin]="isRefresh()">refresh</mat-icon></button>
+      </div>
+       @if(saveButtonAlert()){
+        <button style="margin-bottom: 20px; color: #ff4081;" (click)="saveQueue()" matButton="">Save Queue</button>
+        }
+
+      <div  id="queueList" cdkDropList [cdkDropListData]="queue()" class="list-container queue-list" (cdkDropListDropped)="drop($event)">
+        @for (item of queue(); track item._id) {
+          <div class="track-item" [class.jingle-item]="item.object === 'jingle'" cdkDrag>
+            <span class="time-stamp">{{ formatTime(item.duration) }}</span>
+            <div class="info">
+              <span class="title">{{ item.title }}</span>
+              @if(item.object == 'jingle'){
+              <span class="type-tag">JINGLE</span>
+              }
+
+            </div>
+            <mat-icon class="drag-handle">reorder</mat-icon>
+          </div>
+        } @empty {
+          <div class="empty-placeholder">Drag tracks here to schedule</div>
+        }
+      </div>
+    </section>
+  </div>
+</div>
+

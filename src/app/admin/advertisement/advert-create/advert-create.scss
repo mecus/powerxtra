@@ -1,0 +1,109 @@
+
+.dialog-container {
+  background: #181818;
+  color: white;
+  padding: 10px;
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    font-size: 22px;
+    color: #1DB954; /* Spotify Green */
+    margin-bottom: 20px;
+    padding-left: 20px;
+    h2{ text-transform: capitalize;}
+  }
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background: #282828 !important;
+}
+
+.save-btn {
+  background-color: #1DB954 !important;
+  color: black !important;
+  font-weight: bold !important;
+  border-radius: 500px !important;
+}
+
+.cancel-btn {
+  color: #b3b3b3 !important;
+  background-color: transparent !important;
+}
+
+/* Style the popup timepicker panel */
+::ng-deep .mat-timepicker-content {
+  background-color: #282828 !important;
+  color: white !important;
+  .mat-timepicker-button { color: #1DB954 !important; }
+}
+
+ .form-field {
+    background-color: #1a1a1a;
+  }
+  .duo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+  }
+.advert-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
+
+  mat-form-field {
+    width: 100%;
+    color: #fff;
+
+    .mat-form-field-label {
+      color: #ff4081 !important; // radio pink accent
+    }
+
+    input, textarea, mat-select {
+      color: #fff;
+    }
+
+    .mat-input-element {
+      color: #fff;
+    }
+  }
+
+  .date-fields {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tags-field {
+    mat-chip {
+      background-color: #ff4081;
+      color: #fff;
+    }
+
+    button mat-icon {
+      color: #fff;
+    }
+  }
+
+
+}
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 20px;
+
+  }
+  // button {
+  //   color: #fff;
+  //   font-weight: bold;
+  //   background-color: #1DB954 !important;
+  // }

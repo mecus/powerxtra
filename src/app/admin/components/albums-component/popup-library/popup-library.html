@@ -1,0 +1,134 @@
+<div class="library-container library-menu">
+
+  <div class="header">
+
+    <h2>Music Library <span class="counts">/ {{librarySise}} Tracks</span> </h2>
+
+    <div class="actions form-field-round">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Search tracks</mat-label>
+        <input matInput [(ngModel)]="search" (input)="searchTracks()">
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="addToPlaylist()"
+      >
+        <mat-icon>playlist_add</mat-icon>
+        Add Selected
+      </button>
+      <button (click)="dialogRef.close()" matIconButton> <mat-icon>close</mat-icon></button>
+
+    </div>
+
+  </div>
+
+  <mat-dialog-content>
+
+  <table mat-table [dataSource]="filteredTracks" class="library-table">
+
+    <!-- Select -->
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+
+      <td mat-cell *matCellDef="let track">
+
+        <mat-checkbox
+          (change)="toggleTrack(track)"
+          [checked]="isSelected(track)">
+        </mat-checkbox>
+
+      </td>
+    </ng-container>
+
+    <!-- Artwork -->
+
+    <ng-container matColumnDef="artwork">
+      <th mat-header-cell *matHeaderCellDef></th>
+
+      <td mat-cell *matCellDef="let track">
+
+        <img
+          *ngIf="track.artwork"
+          [src]="track.artwork"
+          class="artwork"
+        />
+
+      </td>
+    </ng-container>
+
+    <!-- Title -->
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+
+      <td mat-cell *matCellDef="let track">
+        {{track.title}}
+      </td>
+    </ng-container>
+
+    <!-- Artist -->
+
+    <ng-container matColumnDef="artist">
+      <th mat-header-cell *matHeaderCellDef>Artist</th>
+
+      <td mat-cell *matCellDef="let track">
+        {{track.artist}}
+      </td>
+    </ng-container>
+
+    <!-- Waveform -->
+
+    <!-- <ng-container matColumnDef="waveform">
+
+      <th mat-header-cell *matHeaderCellDef>Preview</th>
+
+      <td mat-cell *matCellDef="let track">
+
+        <app-waveform [url]="track.file"></app-waveform>
+
+      </td>
+
+    </ng-container> -->
+
+    <!-- Duration -->
+
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef>Length</th>
+
+      <td mat-cell *matCellDef="let track">
+        {{formatTime(track.duration)}}
+      </td>
+    </ng-container>
+
+    <!-- actions -->
+    <!-- <ng-container matColumnDef="actions">
+
+      <th mat-header-cell *matHeaderCellDef></th>
+
+      <td mat-cell *matCellDef="let track" class="library-menu">
+        <mat-icon [matMenuTriggerFor]="trackMenu" > more_vert </mat-icon>
+      <mat-menu #trackMenu="matMenu">
+          <button mat-menu-item (click)="trackDetails(track)" > <mat-icon>open_in_new</mat-icon> View Track</button>
+          <button mat-menu-item (click)="editTrack(track)"> <mat-icon>edit</mat-icon>Edit Track</button>
+          <button mat-menu-item (click)="deleteTrack(track)" > <mat-icon>delete</mat-icon> Delete Track</button>
+        </mat-menu>
+      </td>
+
+    </ng-container> -->
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns">
+    </tr>
+
+  </table>
+   </mat-dialog-content>
+
+</div>

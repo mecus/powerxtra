@@ -33,11 +33,17 @@ export class ApiService {
   createAlbum(album: IAlbum | any) {
     return lastValueFrom(this.http.post(`${backendApiUrl}/api/albums/create`, album));
   }
+  updateAlbum(ID, patch) {
+    return lastValueFrom(this.http.patch(`${backendApiUrl}/api/albums/update/${ID}`, patch));
+  }
   listAlbums(){
     return this.http.get(`${backendApiUrl}/api/albums/list`);
   }
   getAlbum(ID){
     return lastValueFrom(this.http.get(`${backendApiUrl}/api/albums/get/${ID}`));
+  }
+  deleteAlbum(ID) {
+    return lastValueFrom(this.http.delete(`${backendApiUrl}/api/albums/delete/${ID}`));
   }
   addTracksToAlbum(trackListData: {list: []}) {
     return lastValueFrom(this.http.patch(`${backendApiUrl}/api/albums/add_track`, trackListData));

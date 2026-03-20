@@ -1,0 +1,92 @@
+<div class="dialog-container dark-radio-skin">
+  <header mat-dialog-title>
+    <mat-icon>add_circle</mat-icon>
+    <span style="text-transform: capitalize;"> {{data?.type}} Schedule Programme</span>
+  </header>
+
+  <mat-dialog-content>
+    <form [formGroup]="programmeForm" class="form-grid general-form-field mat-select-library">
+      <!-- Artwork Upload Section -->
+      <div class="artwork-upload">
+        <div class="preview-box" [class.has-image]="artworkPreview()">
+          @if (artworkPreview()) {
+            <img [src]="artworkPreview()" alt="Programme Art">
+          } @else {
+            <mat-icon>image</mat-icon>
+            <span>No Artwork</span>
+          }
+          <input type="file" #fileInput (change)="onFileSelected($event)" hidden accept="image/*">
+          <button type="button" mat-mini-fab color="accent" class="upload-trigger" (click)="fileInput.click()">
+            <mat-icon>cloud_upload</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Programme Artwork Url</mat-label>
+        <input (input)="artworkPreview.set(programmeForm.value.artwork)"  matInput formControlName="artwork" placeholder="artwork url">
+      </mat-form-field>
+      <!-- Show Title -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Programme Title</mat-label>
+        <input matInput formControlName="title" placeholder="e.g. Midnight Beats">
+      </mat-form-field>
+
+      <!-- Presenter Search (Autocomplete) -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Search Presenter</mat-label>
+        <input type="text" matInput formControlName="presenter" [matAutocomplete]="auto">
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (p of filteredPresenters(); track p) {
+            <mat-option [value]="p">{{ p }}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="row duo">
+        <!-- Start Time -->
+        <mat-form-field appearance="outline">
+          <mat-label>Start Time</mat-label>
+          <input matInput [matTimepicker]="startPicker" formControlName="startTime">
+          <mat-timepicker-toggle matIconSuffix [for]="startPicker"></mat-timepicker-toggle>
+          <mat-timepicker #startPicker></mat-timepicker>
+        </mat-form-field>
+          <!-- End Time -->
+        <mat-form-field appearance="outline">
+          <mat-label>End Time</mat-label>
+          <input matInput [matTimepicker]="endPicker" formControlName="endTime">
+          <mat-timepicker-toggle matIconSuffix [for]="endPicker"></mat-timepicker-toggle>
+          <mat-timepicker #endPicker></mat-timepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <!-- Category -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option value="Live">Live Broadcast</mat-option>
+            <mat-option value="AutoDJ">Automated Mix</mat-option>
+            <mat-option value="Podcast">Podcast Replay</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+       <div class="row">
+        <!-- Description -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" name="" id=""></textarea>
+        </mat-form-field>
+
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()" class="cancel-btn">CANCEL</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="!programmeForm.valid" class="save-btn">
+      ADD TO SCHEDULE
+    </button>
+  </mat-dialog-actions>
+</div>

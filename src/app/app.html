@@ -9,12 +9,12 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <mat-drawer-container class="layout">
-  <mat-drawer class="sidebar" mode="side" opened>
+  <mat-drawer class="sidebar" [mode]="drawer().mode" [opened]="drawer().open">
     <app-sidebar></app-sidebar>
   </mat-drawer>
   <mat-drawer-content class="main">
     <div class="top-nav">
-      <div class="left-nav">
+      <div class="left-nav" [ngClass]="drawer().open? 'leftNav260':'leftNav20'">
         <button (click)="navigateBack()" mat-icon-button><mat-icon>arrow_back</mat-icon></button>
       </div>
       <nav class="nav">
@@ -26,7 +26,7 @@
             }
           </button>
         }@else {
-          <button routerLink="/auth" matButton="outlined">
+          <button (click)="login()" matButton="outlined">
             <mat-icon>person</mat-icon> Login
           </button>
         }
@@ -37,8 +37,12 @@
       </mat-menu>
     </div>
     <div class="outlet">
+      <div class="toggleMenu">
+      <button (click)="toggleMenu()" matIconButton><mat-icon>close</mat-icon></button>
+    </div>
      <router-outlet />
     </div>
+
      <div class="player-margin">
       <!-- <p>This is the player margin</p> -->
      </div>

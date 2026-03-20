@@ -1,3 +1,56 @@
-<div class="radio-container">
+<!-- <div class="radio-container">
   <button (click)="startLiveRadio()" matButton="outlined">Live Radio</button>
+</div> -->
+<div class="radio-page">
+  <div class="glass-container">
+
+    <!-- Player Section (Top on Mobile) -->
+    <section class="player-section">
+      <div class="artwork-container">
+        <div class="artwork-wrapper">
+          <img [src]="artwork()" [class.playing]="isPlaying()" alt="Album Art">
+          @if (isPlaying()) { <div class="pulse-ring"></div> }
+        </div>
+      </div>
+
+      <div class="meta">
+        <h2>{{ showName() }}</h2>
+        <p>with <span>{{ presenter() }}</span></p>
+      </div>
+
+      <div class="controls">
+        <div class="latency-meter" [class.high]="latency() >= 1500">
+          <mat-icon>sensors</mat-icon>
+          <span>{{ latency() }}ms Delay</span>
+        </div>
+
+        <button mat-fab class="play-toggle" (click)="toggleRadio()">
+          <mat-icon>{{ isPlaying() ? 'stop' : 'play_arrow' }}</mat-icon>
+        </button>
+      </div>
+    </section>
+
+    <!-- Chat Section (Bottom on Mobile) -->
+    <section class="chat-section">
+      <header>
+        <mat-icon>chat_bubble_outline</mat-icon>
+        LIVE CHAT
+      </header>
+
+      <div class="message-list">
+        @for (msg of messages(); track $index) {
+          <div class="message">
+            <span class="user">{{ msg.user }}:</span>
+            <span class="text">{{ msg.text }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="input-area">
+        <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Say something...">
+        <button mat-icon-button (click)="sendMessage()"><mat-icon>send</mat-icon></button>
+      </div>
+    </section>
+
+  </div>
 </div>

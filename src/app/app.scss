@@ -9,7 +9,7 @@
   }
   .sidebar{
     background: #000;
-    width: 240px;
+    width: 260px;
     padding-left: 10px;
     overflow: hidden;
   }
@@ -36,7 +36,7 @@
   width: 100%;
   top: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 100;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -47,7 +47,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   .left-nav{
     // background-color: red;
-    margin-left: 260px;
+    // margin-left: 260px;
     button{
       margin-left: 20px;
       mat-icon{
@@ -56,6 +56,25 @@
       }
     }
   }
+}
+.leftNav20 {
+   margin-left: 20px;
+}
+.leftNav260 {
+   margin-left: 260px;
+}
+.toggleMenu{
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  top: 10;
+  // bottom: 0;
+  left: 0;
+  margin-left: 300px;
+  // margin-bottom: 250px;
+  // background-color: red;
+  z-index: 10000;
+
 }
  @media(max-width:768px){
     .layout { flex-direction: column; }

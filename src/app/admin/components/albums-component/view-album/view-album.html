@@ -37,6 +37,10 @@
       <p><strong>{{ album().artist }}</strong> • {{ album().tracks.length }} songs <span>- Duration: {{ formatTime(albumDuration()) }}</span> </p>
     </div>
   </header>
+  <div class="action-panel">
+    <button (click)="playAll()" class="play" matButton="outlined"><mat-icon>{{ 'play_circle' }}</mat-icon>Play All</button>
+    <button (click)="addTracks({name: album().name, _id: album()._id})" matButton="outlined"> <mat-icon>add</mat-icon> Add Tracks</button>
+  </div>
 
   <div class="tracklist-container">
     <table mat-table [dataSource]="album().tracks" class="dark-table">

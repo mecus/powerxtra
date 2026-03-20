@@ -87,7 +87,7 @@ export class AlbumCreateComponent {
       release_year: [''],
       track_counts: [''],
       genre: [''],
-      // tags: [[]],
+      tags: [''],
       category: [''],
       description: ['']
     })
@@ -118,8 +118,12 @@ export class AlbumCreateComponent {
   }
 
   async submit() {
+    if(!this.currentUser) {
+      this.snackBar.open("No user present..., Please login to continue",'X');
+      return null
+    };
     if (this.albumForm.valid) {
-      this.appService.startSpinner('Creating Album...')
+      this.appService.startSpinner(`Creating ${this.objectType}...`);
       try{
       const data = this.albumForm.value;
       const filename = data.name;
@@ -130,6 +134,7 @@ export class AlbumCreateComponent {
       data.status = "active";
       data.createdBy = this.currentUser.displayName;
       data.dateCreated = new Date();
+      data.object = this.objectType;
       // console.log('Album Created:', this.albumForm.value)
       const newAlbum: any = await this.apiService.createAlbum(data);
       // console.log(newAlbum);

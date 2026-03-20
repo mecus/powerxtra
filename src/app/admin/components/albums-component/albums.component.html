@@ -13,7 +13,7 @@
     placeholder="Search by album, artist or genre">
   </mat-form-field>
   <button [matMenuTriggerFor]="createMenu" matButton="outlined">Create</button>
-  <mat-menu #createMenu="matMenu">
+  <mat-menu #createMenu="matMenu" class="dark-menu">
     <button (click)="createAlbum('album')" mat-menu-item>Create Album</button>
     <button (click)="createAlbum('playlist')" mat-menu-item>Create Playlist</button>
     <button (click)="createAlbum('selection')" mat-menu-item>Create Selection</button>
@@ -42,7 +42,7 @@
   <mat-icon>visibility</mat-icon>
   </button>
 
-  <button mat-icon-button color="accent">
+  <button (click)="editAlbum(album)" mat-icon-button color="accent">
   <mat-icon>edit</mat-icon>
   </button>
 

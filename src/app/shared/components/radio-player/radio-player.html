@@ -13,6 +13,11 @@
         <div class="track-name">{{ nowPlaying().title }}</div>
         <div class="artist-name">{{ nowPlaying().artist }}</div>
       </div>
+      @if(isPlay()){
+       <div class="equalizer">
+          <span></span><span></span><span></span>
+        </div>
+      }
       <button mat-icon-button (click)="toggleLike()" [class.liked]="isLiked">
         <mat-icon>{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
       </button>

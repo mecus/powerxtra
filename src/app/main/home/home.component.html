@@ -1,1 +1,10 @@
-<p>home works!</p>
+
+   <div class="status-indicator">
+    <button (click)="playRadio()">Play</button>
+    <p>Radio Live</p>
+    @if (!socketService.isConnected()) {
+      <span class="warning">⚠️ Reconnecting to Live Stream...</span>
+    } @else {
+      <span class="live">● LIVE</span>
+    }
+  </div>

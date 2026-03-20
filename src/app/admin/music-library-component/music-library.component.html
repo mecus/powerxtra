@@ -110,7 +110,7 @@
 
       <td mat-cell *matCellDef="let track" class="library-menu">
         <mat-icon [matMenuTriggerFor]="trackMenu" > more_vert </mat-icon>
-      <mat-menu #trackMenu="matMenu">
+      <mat-menu #trackMenu="matMenu" class="dark-menu">
           <button mat-menu-item (click)="trackDetails(track)" > <mat-icon>open_in_new</mat-icon> View Track</button>
           <button mat-menu-item (click)="editTrack(track)"> <mat-icon>edit</mat-icon>Edit Track</button>
           <button mat-menu-item (click)="deleteTrack(track)" > <mat-icon>delete</mat-icon> Delete Track</button>

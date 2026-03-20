@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule, MatSliderThumb } from '@angular/material/slider';
 import { RadioService } from '../../../core/services/radio-service/radio.service';
 import { select, Store } from '@ngrx/store';
+import { Media, StoreService } from '../../../store';
 // import IcecastMetadataStats from 'icecast-metadata-js';
 
 @Component({
@@ -25,12 +26,18 @@ export class RadioPlayer implements OnInit, OnDestroy, AfterViewInit {
   private audioCtx;
   private analyser;
   currentTimeProgress = signal(0);
+  mediaState = signal<Media>({media: "autoDJ"});
   constructor(
      public radioService: RadioService,
      private store: Store<any>,
-      private cdr: ChangeDetectorRef
+      private cdr: ChangeDetectorRef,
+      private media: StoreService
     // @Inject(PLATFORM_ID) private platformId: Object
   ){
+    this.media.getMediaState().subscribe((data: Media) => {
+        console.log("Player", data)
+        this.mediaState.set(data);
+      });
 
   }
   @ViewChild('visualizerCanvas') canvasRef!: ElementRef<HTMLCanvasElement>;
@@ -72,7 +79,7 @@ export class RadioPlayer implements OnInit, OnDestroy, AfterViewInit {
       this.setupAudio();
     }
      this.store.pipe(select('radio')).subscribe((data: any) => {
-      console.log(data)
+      // console.log(data)
       this.setMetas(data);
     })
   }

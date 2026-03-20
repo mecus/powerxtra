@@ -1,0 +1,100 @@
+<div class="adverts-container mat-elevation-z4">
+  <div class="header">
+    <h2>Adverts</h2>
+    <button matButton="outlined" color="accent" (click)="createAdvert()">
+      Create Advert
+    </button>
+  </div>
+@if(loading()){
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+  @if(!loading() && adverts().length > 0) {
+
+      <div class="adverts">
+        @for(advert of adverts(); track advert) {
+        <mat-card>
+          <mat-card-header>
+            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <mat-card-title>
+              {{advert.type}}
+              @if(advert.active){
+                <mat-icon class="active" >check</mat-icon>
+              }@else {
+                 <mat-icon class="inactive" >close</mat-icon>
+              }
+            </mat-card-title>
+            <mat-card-subtitle>
+              <!-- {{advert.start_date | date}} - {{advert.end_date | date}} -->
+              <p style="color: white; font-size: 0.8rem;">Period: {{advert.start_date | date}} - {{advert.end_date | date}}</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+          @if(advert.imageUrl){
+            <img mat-card-image [src]="advert.imageUrl" alt="">
+          }
+          @if(advert.fileUrl) {
+            <div class="audio-section">
+              <audio [src]="advert.fileUrl" controls></audio>
+            </div>
+
+          }
+
+          <mat-card-content>
+            <h3>Title: {{advert.title}}</h3>
+            <p>Status: {{advert.status}}</p>
+            <p>Description: {{advert.description}}</p>
+          </mat-card-content>
+
+          <mat-card-actions class="advert-actions">
+            <button [matMenuTriggerFor]="activeMenu" mat-icon-button color="primary" (click)="viewAdvert(advert)" matTooltip="View">
+              <mat-icon>{{advert.active? 'visibility':'visibility_off'}}</mat-icon>
+            </button>
+            <mat-menu #activeMenu="matMenu">
+              @if(advert.active){
+                <button (click)="updateStatus('inactive', advert)" mat-menu-item>Deactive</button>
+              }@else {
+                <button (click)="updateStatus('active', advert)" mat-menu-item>Activate</button>
+              }
+
+            </mat-menu>
+            <button mat-icon-button color="warn" (click)="deleteAdvert(advert)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="updateAdvert(advert)" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        }
+      </div>
+
+
+
+    <!-- <mat-list>
+      @for(advert of adverts(); track advert) {
+        <mat-list-item class="advert-item">
+          <div class="advert-info">
+            <h3>{{ advert.title }}</h3>
+            <p>{{ advert.description }}</p>
+          </div>
+
+          <div class="advert-actions">
+            <button mat-icon-button color="primary" (click)="viewAdvert(advert)" matTooltip="View">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteAdvert(advert)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="updateAdvert(advert)" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+      }
+    </mat-list> -->
+  }
+@if(!loading() && adverts().length  === 0){
+  <p class="empty">No adverts found.</p>
+}
+
+</div>

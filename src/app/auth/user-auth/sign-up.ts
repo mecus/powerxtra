@@ -11,6 +11,7 @@ import { Auth, authState } from '@angular/fire/auth';
 // import { lastValueFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sign-up',
@@ -38,7 +39,8 @@ export class SignUp {
     private authService: AuthService,
     private appService: AppService,
     private store: Store<any>,
-    private router: Router
+    private router: Router,
+    private dialogRef: MatDialogRef<SignUp>
   ) {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -56,7 +58,9 @@ export class SignUp {
 //       // this.currentUser = await lastValueFrom(authState(this.auth));
 //       // console.log(this.currentUser)
 //   }
-
+close(){
+  this.dialogRef.close();
+}
   private updateValidators() {
     const usernameControl = this.authForm.get('username');
     if (this.isLogin) {
@@ -67,25 +71,16 @@ export class SignUp {
     usernameControl?.updateValueAndValidity();
   }
   login(data){
-    this.authService.login(data.email, data.password).then(async(auth) => {
-      console.log(auth);
-       const auth2: any = await this.auth.currentUser?.getIdTokenResult(true);
-       console.log("Auth", auth2)
-      this.currentUser = {
-        authTime: auth2?.authTime,
-        expirationTime: auth2?.claims.exp,
-        token: auth2?.token,
-        email: auth2?.claims.email,
-        displayName: auth2.claims.name,
-        accountTyle: auth2.claims.accountType,
-        uid: auth2.claims.user_id,
+    this.authService.login(data.email, data.password).then((auth) => {
+      this.currentUser = auth;
+      if(auth){
+        this.appService.endSpinner();
+        this.dialogRef.close(this.currentUser);
+      }else{
+        this.appService.endSpinner();
+        this.dialogRef.close();
       }
-       if (isPlatformBrowser(this.platformId)){
-        localStorage.setItem("auth", JSON.stringify(this.currentUser));
-       }
-      this.store.dispatch({type: '[USER] Init User', user: this.currentUser});
-      this.appService.endSpinner();
-       this.router.navigate(["/"]);
+      //  this.router.navigate(["/"]);
     }).catch(err => {
       console.log(err);
       this.appService.endSpinner();
@@ -134,10 +129,18 @@ export class SignUp {
   // }
 
   googleLogin() {
-    this.authService.loginWithGoogle().subscribe({
-      next: () => console.log('Google login successful'),
-      error: (err) => console.error('Google login failed:', err)
+    this.authService.loginWithGoogle().then((result) => {
+      console.log('Google login successful')
+       this.dialogRef.close(this.currentUser);
+    }).catch((err) => {
+      console.error('Google login failed:', err)
+       this.dialogRef.close();
     });
+
+    // .subscribe({
+    //   next: () => console.log('Google login successful'),
+    //   error: (err) => console.error('Google login failed:', err)
+    // });
   }
 
 }

@@ -17,4 +17,5 @@ export interface IUser {
   uid?: string;
   category?: string; // internation | local
   password?: string;
+  roles?: string;
 }

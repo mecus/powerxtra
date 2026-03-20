@@ -1,0 +1,114 @@
+<div class="autodj-container" [class.is-active]="isActive()">
+
+  <!-- TOP SECTION: Now Playing -->
+  <section class="now-playing-card">
+    <div class="artwork-container">
+      <img [src]="nowPlaying().artwork" alt="Artwork" [class.spinning]="isActive()">
+      @if (isActive()) { <div class="live-indicator">LIVE</div> }
+    </div>
+
+    <div class="track-info">
+      <h1>{{ nowPlaying().title }}</h1>
+      <p>{{ nowPlaying().artist }}</p>
+      <!-- <app-waveform></app-waveform> -->
+      <!-- <div class="player-card">
+        <img [src]="nowPlaying().artwork" class="main-art">
+        <div class="meta">
+          <h2>{{ nowPlaying().title }}</h2>
+          <app-waveform></app-waveform>
+        </div>
+      </div> -->
+
+      <!-- <div class="progress-area">
+        <mat-progress-bar mode="determinate" [value]="isActive() ? progress() : 0"></mat-progress-bar>
+        <div class="time-meta">
+          <span>02:15</span>
+          <span>{{ nowPlaying().duration }}</span>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="main-controls">
+      @if(isActive()){
+      <button mat-fab (click)="stopRadio()" [color]="isActive() ? 'warn' : 'primary'">
+          <mat-icon>stop</mat-icon>
+        </button>
+      }@else {
+        <button mat-fab (click)="startRadio()" [color]="isActive() ? 'warn' : 'primary'">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      }
+
+      <!-- <span class="status-text">{{ isActive() ? 'AutoDJ Streaming' : 'System Standby' }}</span> -->
+    </div>
+  </section>
+
+  <!-- MIDDLE SECTION: Advert Slide -->  <!-- ADVERT SLOT SECTION -->
+  <div class="ad-slot">
+    <a [href]="advertService.currentAd().link" target="_blank">
+      <img [src]="advertService.currentAd().image" class="ad-image" alt="Sponsored">
+    </a>
+    <div class="ad-timer-line"></div> <!-- Visual cue for 30s rotation -->
+  </div>
+
+  <!-- <section class="advert-slot">
+    <div class="ad-container shimmer">
+      <img [src]="currentAd().image" alt="Promotion">
+      <div class="ad-overlay">
+        <span>SPONSORED</span>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- BOTTOM SECTION: History -->
+  <section class="history-pane">
+    <header>
+      <mat-icon>history</mat-icon>
+      RECENTLY PLAYED
+    </header>
+
+    <div class="history-list">
+      @for (track of history(); track track.title) {
+        <div class="history-item">
+          <div class="details">
+            <span class="h-title">{{ track.title }}</span>
+            <span class="h-artist">{{ track.artist }}</span>
+          </div>
+          <span class="h-time">{{ track.time }}</span>
+        </div>
+      }
+    </div>
+  </section>
+</div>
+
+
+<!-- <div class="artwork-wrapper">
+  <img [src]="artwork()" [class.blur]="isBuffering()">
+
+  @if (isBuffering()) {
+    <div class="buffering-overlay">
+      <mat-spinner diameter="40"></mat-spinner>
+      <span>REFILLING SIGNAL...</span>
+    </div>
+  }
+</div> -->
+
+
+<!-- <div class="autodj-container">
+
+  <div class="player-card">
+    <img [src]="nowPlaying().artwork" class="main-art">
+    <div class="meta">
+      <h2>{{ nowPlaying().title }}</h2>
+      <app-waveform></app-waveform>
+    </div>
+  </div>
+
+
+  <div class="ad-slot">
+    <a [href]="adService.currentAd().link" target="_blank">
+      <img [src]="adService.currentAd().image" class="ad-image" alt="Sponsored">
+    </a>
+    <div class="ad-timer-line"></div>
+  </div>
+</div> -->

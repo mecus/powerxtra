@@ -5,7 +5,7 @@
 import { inject, Injectable, PLATFORM_ID, signal, OnDestroy } from '@angular/core';
 import { StreamService } from '../stream-service/stream.service';
 import { select, Store } from '@ngrx/store';
-import { duration, updateNowPlaying, play } from '../../../store/radio.actions';
+import { duration, updateNowPlaying, play } from '../../../store/radio/radio.actions';
 import { isPlatformBrowser } from '@angular/common';
 import { interval, Subject, takeUntil } from 'rxjs';
 import { extractAudioMetadata, getAudioMetadataFromUrl } from '../../utils/file-upload-metadate';
@@ -20,6 +20,7 @@ export class RadioService implements OnDestroy {
   intervalSub;
   private audio!: HTMLAudioElement;
   private platformId = inject(PLATFORM_ID);
+  audioAnalyserService = inject(AudioAnalyserService);
 
   isPlaying = signal(false);
   volume = signal(0.8);
@@ -160,7 +161,12 @@ export class RadioService implements OnDestroy {
     //      this.store.dispatch(updateNowPlaying({ payload: data }));
     //    });
     //  }, 10000); // refresh every 10s
+
+
+    // Monitor the buffer health every 500ms
+    // setInterval(() => this.checkBufferHealth(), this.BUFFER_CHECK_MS);
   }
+  // Start Live Auto DJ
   startLiveRadio(){
      this.pause();
       this.audio.src = '';
@@ -175,6 +181,7 @@ export class RadioService implements OnDestroy {
       this.audio.volume = this.volume();
       this.play();
       this.isLive = true;
+      // this.audioAnalyserService.connectSource(this.audio); // connecting for waveform
       this.getPlayingNowFromServer();
       // this.isPlaying.set(true);
       this.store.dispatch({ type: '[Radio] On' });
@@ -182,6 +189,18 @@ export class RadioService implements OnDestroy {
         console.log(time)
         this.getPlayingNowFromServer();
       })
+    }
+  }
+  // Stop Live Auto DJ
+  stopLiveRatio() {
+    if(this.audio) this.audio.pause();
+    this.audio.src = '';
+    this.isPlaying.set(false);
+    this.store.dispatch({ type: '[Radio] Pause' });
+    this.store.dispatch({ type: '[Radio] Off' });
+    this.isLive = false;
+    if(this.intervalSub) {
+      this.intervalSub.unsubscribe();
     }
   }
   async getPlayingNowFromServer(){
@@ -195,9 +214,43 @@ export class RadioService implements OnDestroy {
       console.log(err);
     }
   }
-  getRadiosate() {
+  getRadiostate() {
     return this.store.pipe(select('radio'));
   }
+
+   // Signal to show "Buffering..." in your Radio Skin UI
+  isBuffering = signal(false);
+
+  // CONFIG: Minimum seconds of audio needed to resume playback
+  private readonly MIN_BUFFER_TO_PLAY = 3.0;
+  private readonly BUFFER_CHECK_MS = 500;
+
+ private checkBufferHealth() {
+    if (!this.audio?.paused && this.audio?.buffered.length > 0) {
+      const bufferedEnd = this.audio.buffered.end(this.audio.buffered.length - 1);
+      const currentTime = this.audio.currentTime;
+      const bufferGap = bufferedEnd - currentTime;
+
+      // GUARD: If buffer falls below 0.5s, pause to refill
+      if (bufferGap < 0.5 && !this.isBuffering()) {
+        console.warn('[BufferGuard] Low buffer detected. Pausing to refill...');
+        this.isBuffering.set(true);
+        this.audio.pause();
+      }
+
+      // RESUME: If we have pre-filled enough audio, start playing again
+      if (this.isBuffering() && bufferGap >= this.MIN_BUFFER_TO_PLAY) {
+        console.log('[BufferGuard] Buffer healthy. Resuming...');
+        this.isBuffering.set(false);
+        this.audio.play();
+      }
+    }
+  }
+
+
+
+
+
 
 
   play() {
@@ -316,13 +369,13 @@ const playList = [
     url: 'https://firebasestorage.googleapis.com/v0/b/allmembers.appspot.com/o/audio%2FUmu-Obiligbo-Enjoyment.mp3?alt=media&token=3782f06c-5475-437b-b84d-b27444f66f71'
 
   },
-    {
-    title: 'Essence',
-    artist: 'Wizkid ft. Tems',
-    artwork: 'assets/wizkid.jpg',
-    url: 'https://firebasestorage.googleapis.com/v0/b/allmembers.appspot.com/o/audio%2FLouis%20Island%20-%20Somewhere%20New.mp3?alt=media&token=829d78ab-0ecd-48e5-9424-1b1aeea292b9', //'https://s2.radio.co' // Replace with your Afrobeats stream
+  //   {
+  //   title: 'Essence',
+  //   artist: 'Wizkid ft. Tems',
+  //   artwork: 'assets/wizkid.jpg',
+  //   url: 'https://firebasestorage.googleapis.com/v0/b/allmembers.appspot.com/o/audio%2FLouis%20Island%20-%20Somewhere%20New.mp3?alt=media&token=829d78ab-0ecd-48e5-9424-1b1aeea292b9', //'https://s2.radio.co' // Replace with your Afrobeats stream
 
-  },
+  // },
   {
     title: 'PuTTin',
     artist: 'Teckno',
@@ -339,3 +392,42 @@ const playList = [
   },
 ]
 
+// https://firebasestorage.googleapis.com/v0/b/allmembers.appspot.com/o/audio%2FLouis%20Island%20-%20Somewhere%20New.mp3?alt=media&token=829d78ab-0ecd-48e5-9424-1b1aeea292b9
+
+
+
+
+// import { Injectable, signal } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class AudioAnalyserService {
+  private platformId = inject(PLATFORM_ID);
+  private audioCtx;  //= new (window.AudioContext || (window as any).webkitAudioContext)();
+  private analyserNode; // = this.audioCtx.createAnalyser();
+
+  constructor() {
+
+    if (isPlatformBrowser(this.platformId)){
+       this.audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+        this.analyserNode = this.audioCtx.createAnalyser();
+        this.analyserNode.fftSize = 256;
+    }
+  }
+   // 2. ADD THIS METHOD to resolve the TS(2339) error
+  getAudioContext(): AudioContext {
+    return this.audioCtx;
+  }
+
+  // Helper to connect an audio element to the analyser
+  connectSource(audioElement: HTMLAudioElement) {
+    if (isPlatformBrowser(this.platformId)){
+      const source = this.audioCtx.createMediaStreamSource((audioElement as any).captureStream());
+      source.connect(this.analyserNode);
+    }
+
+  }
+
+  getAnalyser(): AnalyserNode {
+    return this.analyserNode;
+  }
+}

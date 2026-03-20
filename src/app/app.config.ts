@@ -1,6 +1,6 @@
 import { ApplicationConfig, isDevMode, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { radioReducer } from './store/radio.reducer';
+import { radioReducer } from './store/radio/radio.reducer';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { authInterceptor } from './core/interceptors';
 import { InitializeApp } from '../environments/firebase-config';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { libraryReducer, userReducer } from './store';
+import { drawerReducer, libraryReducer, mediaReducer, userReducer } from './store';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 // import { provideAnimations } from '@angular/platform-browser/animations';
@@ -24,7 +24,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     // provideAnimations(),
     provideNativeDateAdapter(),
-    provideStore({ radio: radioReducer, user: userReducer, library: libraryReducer }),
+    provideStore({
+       radio: radioReducer, user: userReducer, library: libraryReducer,
+       drawer: drawerReducer, media: mediaReducer
+       }),
      // Enable DevTools
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states

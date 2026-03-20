@@ -1,0 +1,126 @@
+<div class="landing-page dark-theme">
+
+    @if (isLoading()) {
+    <!-- SKELETON UI -->
+    <div class="skeleton-wrapper">
+      <div class="skeleton-hero shimmer"></div>
+      <div class="skeleton-grid">
+        <div class="skeleton-card shimmer" *ngFor="let i of [1,2,3]"></div>
+      </div>
+    </div>
+  } @else {
+  <!-- Hero Section -->
+  <section class="hero-bento">
+    <div class="ad-card main-ad">
+      <div class="ad-content">
+        <span class="badge">PROMOTION</span>
+        <h1>PowerXtra Premium</h1>
+        <p>No ads. Unlimited skips. High fidelity.</p>
+        <button mat-flat-button color="primary">TRY FOR FREE</button>
+      </div>
+      <img src="https://firebasestorage.googleapis.com/v0/b/allmembers.appspot.com/o/blog%20image%2Fgas-pipe.webp?alt=media&token=3732b879-ed43-411e-95c3-2ab670e534ef" alt="Music Banner">
+    </div>
+  </section>
+
+  <!-- Horizontal Scrollable Sections -->
+  <main class="bento-grid">
+    <!-- Schedule Section (Slidable) -->
+    <section class="bento-item full-width">
+      <header><h3><mat-icon>timer</mat-icon> Live Schedule</h3></header>
+      <div class="horizontal-slider">
+        @for (show of schedule(); track show.title) {
+          <div class="show-card" [class.live]="show.live">
+            <div class="art-container">
+              <img [src]="show.art" [alt]="show.title">
+              @if (show.live) { <span class="live-tag">LIVE</span> }
+            </div>
+            <div class="info">
+              <span class="time">{{ show.time }}</span>
+              <h4>{{ show.title }}</h4>
+              <p>{{ show.host }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Artists Section -->
+    <section class="bento-item artist-section">
+      <header><h3>Trending Artists</h3></header>
+      <div class="artist-list horizontal-slider">
+        @for (artist of topArtists(); track artist.name) {
+          <div class="artist-mini">
+            <img [src]="artist.image" [alt]="artist.name">
+            <span class="text">{{ artist.name }}</span>
+            <span class="text">{{artist.type}}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- News Widget -->
+    <!-- <section class="bento-item news-widget">
+      <header><h3>Latest News</h3></header>
+      <div class="news-list">
+        <div class="news-item">New Studio Launch <mat-icon>chevron_right</mat-icon></div>
+        <div class="news-item">Top 10 Tracks 2025 <mat-icon>chevron_right</mat-icon></div>
+      </div>
+    </section> -->
+      <!-- News Widget with Images -->
+    <section class="bento-item news-section">
+      <header><h3><mat-icon>newspaper</mat-icon> Station News</h3></header>
+      <div class="news-horizontal-scroll">
+        @for (item of news(); track item.headline) {
+          <div class="news-card">
+            <img [src]="item.image" alt="News Thumb">
+            <div class="news-info">
+              <h4>{{ item.headline }}</h4>
+              <span>{{ item.date }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="bento-item podcast-section">
+  <header class="section-header">
+    <div class="title-group">
+      <mat-icon>mic_external_on</mat-icon>
+      <h3>Latest Podcasts</h3>
+    </div>
+    <button mat-button class="see-more-btn" (click)="seeAllPodcasts()">
+      SEE ALL <mat-icon>chevron_right</mat-icon>
+    </button>
+  </header>
+
+  <!-- Touch-Swipe Horizontal Slider -->
+  <div class="podcast-slider horizontal-scroll">
+    @for (pod of podcasts(); track pod.title) {
+      <div class="podcast-card">
+        <div class="art-container">
+          <img [src]="pod.art" [alt]="pod.title">
+          <button mat-mini-fab class="play-btn">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+        </div>
+        <div class="pod-info">
+          <h4>{{ pod.title }}</h4>
+          <p>{{ pod.host }}</p>
+          <span class="ep-count">{{ pod.episodes }} Episodes</span>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+  </main>
+  }
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+.user-edit-container {
+  background: #181818;
+  color: white;
+  padding: 10px;
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 900;
+    color: #1DB954; /* Spotify Green */
+    font-size: 24px;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+  }
+}
+
+.editor-layout {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 30px;
+}
+
+.avatar-sidebar {
+  text-align: center;
+  .avatar-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    background: #282828;
+    border: 3px solid #1DB954;
+
+    img { width: 100%; height: 100%; object-fit: cover; }
+    .upload-overlay {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: 0.3s; cursor: pointer;
+    }
+    &:hover .upload-overlay { opacity: 1; }
+  }
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.row { width: 100%; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.row-full{
+  width: 100%;
+  mat-form-field{
+    width: 100%;
+  }
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background: #282828 !important;
+}
+
+.save-btn {
+  background-color: #1DB954 !important;
+  color: black !important;
+  font-weight: 900 !important;
+  border-radius: 500px !important;
+  padding: 0 32px !important;
+}
+
+.cancel-btn { color: #b3b3b3 !important; font-weight: 700; }

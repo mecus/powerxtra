@@ -4,3 +4,4 @@ export { IArtist } from "./artist.interface";
 export { IAlbum } from "./album.interface";
 export { IPlaylist } from "./playlist.interface";
 export { IUser } from "./user.interface";
+export { IAdvert } from './advert.interface';

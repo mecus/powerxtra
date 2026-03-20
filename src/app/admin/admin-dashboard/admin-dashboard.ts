@@ -35,8 +35,11 @@ export class AdminDashboard {
   adminLinks: AdminLink[] = [
     { title: 'User Management', description: 'Manage accounts, roles, and permissions.', icon: 'group', path: '/admin/users', color: '#1DB954' },
     { title: 'Audio Library', description: 'Upload and tag new tracks or podcasts.', icon: 'library_music', path: '/admin/library', color: '#1ed760' },
-    { title: 'Albums', description: 'View and manage album.', icon: 'bar_chart', path: '/admin/albums', color: '#ffffff' },
+    { title: 'Albums', description: 'View and manage album, playlist, EP, etc..', icon: 'bar_chart', path: '/admin/albums', color: '#ffffff' },
     { title: 'Radio Playlist', description: 'Manage radio playlist.', icon: 'settings', path: '/admin/radio_playlist', color: '#b3b3b3' },
+    { title: 'Programme Schedule', description: 'Manage radio programme.', icon: 'settings', path: '/admin/programme_schedule', color: '#b3b3b3' },
+    { title: 'News', description: 'News programme editor.', icon: 'bar_chart', path: '/admin/news', color: '#ffffff' },
+    { title: 'Advertisement', description: 'Site advert management.', icon: 'bar_chart', path: '/admin/adverts', color: '#ffffff' },
 
     { title: 'Analytics', description: 'View stream counts and user engagement.', icon: 'bar_chart', path: '/admin/stats', color: '#ffffff' },
     { title: 'System Settings', description: 'Configure API keys and global defaults.', icon: 'settings', path: '/admin/settings', color: '#b3b3b3' },

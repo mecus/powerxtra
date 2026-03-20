@@ -45,6 +45,7 @@
     "music-metadata": "^11.12.1",
     "music-metadata-browser": "^2.5.11",
     "rxjs": "~7.8.0",
+    "socket.io-client": "^4.8.3",
     "tslib": "^2.3.0",
     "wavesurfer.js": "^7.12.1"
   },
@@ -56,7 +57,9 @@
     "@ngrx/store": "^21.0.1",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
+    "autoprefixer": "^10.4.27",
     "jsdom": "^27.1.0",
+    "postcss": "^8.5.8",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }

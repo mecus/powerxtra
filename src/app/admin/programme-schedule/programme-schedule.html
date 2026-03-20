@@ -1,0 +1,68 @@
+<div class="schedule-container">
+  <header class="page-header">
+    <div class="title-meta">
+      <mat-icon>schedule</mat-icon>
+      <div>
+        <h1>On-Air Schedule</h1>
+        <p>Manage daily broadcasts and automated slots.</p>
+      </div>
+    </div>
+    <button mat-fab extended color="primary" (click)="addNewProgramme()">
+      <mat-icon>add</mat-icon>
+      ADD PROGRAMME
+    </button>
+  </header>
+
+  <div class="timeline">
+    @for (show of sortedSchedule(); track show._id) {
+      <div class="timeline-item" [class.is-live]="show.active">
+        <div class="time-slot">
+          <span class="start">{{ show.startTime | date: 'hh:mm' }}</span>
+          <div class="line"></div>
+          <span class="end">{{ show.endTime | date: 'hh:mm' }}</span>
+        </div>
+
+        <mat-card class="programme-card">
+          <mat-card-content>
+            <div class="card-main">
+               <!-- New Artwork Section -->
+              <div class="artwork-thumb">
+                <img [src]="show.artwork || 'assets/default-show.jpg'" alt="Show Artwork">
+                @if (show.active) {
+                  <div class="live-overlay">
+                    <mat-icon>sensors</mat-icon>
+                  </div>
+                }
+              </div>
+              <div class="info">
+                <h3>{{ show.title }}</h3>
+                <p>with <span>{{ show.presenter }}</span></p>
+              </div>
+              <div class="tags">
+                <span class="cat-tag" [attr.data-type]="show.category">{{ show.category }}</span>
+                @if (show.active) {
+                  <span class="live-badge">ON AIR</span>
+                }
+              </div>
+            </div>
+
+            <div class="actions">
+              <button mat-icon-button color="primary" (click)="programmeDetails(show)"><mat-icon>visibility</mat-icon></button>
+              <button mat-icon-button color="primary" (click)="editProgramme(show)" ><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="warn" (click)="deleteProgramme(show)">
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    } @empty {
+      <div class="empty-state">
+        <mat-icon>event_busy</mat-icon>
+        <p>No programmes scheduled for today.</p>
+      </div>
+    }
+  </div>
+</div>
+
+

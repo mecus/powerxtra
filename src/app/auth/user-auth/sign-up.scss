@@ -2,18 +2,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   min-height: 100vh;
+  width: 100vw;
+  padding-top: 50px;
+  border-radius: 0;
+  // background: transparent !important;
   background: linear-gradient(to bottom, #121212 0%, #000000 100%);
+  backdrop-filter: blur(15px) saturate(180%);
   font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .auth-container{
   margin-bottom: 90px;
   padding-bottom: 90px;
 }
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  button{
+    mat-icon{
+      font-size: 25px;
+      &:hover{
+        color: #ffffff;
+      }
+    }
+  }
+}
 
 .auth-card {
   width: 100%;
-  max-width: 450px;
+  // max-width: 450px;
   padding: 40px;
   background-color: #000000 !important;
   border-radius: 8px;
@@ -82,4 +101,15 @@
     border: 1px solid #a7a7a7 !important;
     padding: 20px !important;
   }
+}
+.google-auth{
+
+   button {
+    width: 100%;
+    border-radius: 500px !important;
+    // color: #a7a7a7 !important;
+    border: 1px solid #a7a7a7 !important;
+    padding: 20px !important;
+  }
+
 }

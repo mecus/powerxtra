@@ -1,0 +1,199 @@
+:host {
+  display: block;
+  background: radial-gradient(circle at top left, #1a1a1a, #000);
+  min-height: 100vh;
+  padding: 20px; // Reduced padding for mobile
+  color: white;
+  font-family: 'Circular', sans-serif;
+  overflow-x: hidden;
+  padding-top: 50px;
+}
+
+.glass-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex; // Changed to flex for easier stacking
+  flex-direction: row;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  min-height: 80vh;
+
+  /* MOBILE STACKING LOGIC */
+  @media (max-width: 850px) {
+    flex-direction: column;
+    height: auto;
+    border-radius: 16px;
+  }
+}
+
+/* Player Section */
+.player-section {
+  flex: 1.5;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 500px) {
+    padding: 30px 20px;
+  }
+
+  .artwork-wrapper {
+    position: relative;
+    width: clamp(180px, 40vw, 280px); // Responsive size
+    height: clamp(180px, 40vw, 280px);
+    margin-bottom: 24px;
+
+    img {
+      width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+      border: 4px solid #1DB954; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      &.playing { animation: rotate 25s linear infinite; }
+    }
+  }
+
+  h2 { font-size: clamp(20px, 5vw, 32px); font-weight: 900; margin-bottom: 5px; }
+  p { color: #b3b3b3; span { color: #1DB954; font-weight: 700; } }
+}
+
+.latency-meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1DB954; // Spotify Green
+  background: rgba(29, 185, 84, 0.1);
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  &.high { color: #ff5252; background: rgba(255, 82, 82, 0.1); }
+}
+
+/* Chat Section */
+.chat-section {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: 600px; // Height limit for desktop
+
+  @media (max-width: 850px) {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    height: 400px; // Fixed height on mobile so users can scroll the whole page
+  }
+
+  header {
+    padding: 15px 20px; font-weight: 900; font-size: 11px;
+    color: #b3b3b3; display: flex; align-items: center; gap: 8px;
+  }
+
+  .message-list {
+    flex: 1; padding: 20px; overflow-y: auto;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), transparent);
+  }
+
+  .input-area {
+    padding: 15px; display: flex; background: #121212;
+    input { background: transparent; border: none; color: white; flex: 1; outline: none; padding: 10px; }
+  }
+}
+
+.play-toggle {
+  background: #1DB954 !important;
+  color: black !important;
+  transform: scale(1.2);
+  margin-top: 20px;
+}
+
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+
+
+
+
+// :host {
+//   display: block;
+//   background: radial-gradient(circle at top left, #1a1a1a, #000);
+//   height: 100vh;
+//   padding: 40px;
+//   color: white;
+//   font-family: 'Circular', sans-serif;
+// }
+
+// .glass-container {
+//   max-width: 1000px;
+//   margin: 0 auto;
+//   display: grid;
+//   grid-template-columns: 1fr 350px;
+//   background: rgba(255, 255, 255, 0.03);
+//   backdrop-filter: blur(20px);
+//   border: 1px solid rgba(255, 255, 255, 0.1);
+//   border-radius: 24px;
+//   overflow: hidden;
+//   height: 600px;
+// }
+
+// /* Player Styles */
+// .player-section {
+//   padding: 60px;
+//   text-align: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+
+//   .artwork-wrapper {
+//     position: relative;
+//     width: 250px;
+//     height: 250px;
+//     margin-bottom: 30px;
+//     img {
+//       width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+//       border: 5px solid #1DB954; transition: 0.5s;
+//       &.playing { animation: rotate 20s linear infinite; }
+//     }
+//   }
+// }
+
+// .latency-meter {
+//   display: inline-flex;
+//   align-items: center;
+//   gap: 8px;
+//   font-size: 11px;
+//   font-weight: 700;
+//   color: #1DB954; // Spotify Green
+//   background: rgba(29, 185, 84, 0.1);
+//   padding: 5px 12px;
+//   border-radius: 20px;
+//   margin-bottom: 15px;
+//   &.high { color: #ff5252; background: rgba(255, 82, 82, 0.1); }
+// }
+
+// /* Chat Styles */
+// .chat-section {
+//   background: rgba(0, 0, 0, 0.3);
+//   display: flex;
+//   flex-direction: column;
+//   border-left: 1px solid rgba(255, 255, 255, 0.1);
+
+//   header { padding: 20px; font-weight: 900; font-size: 12px; color: #b3b3b3; letter-spacing: 1.5px; }
+
+//   .message-list {
+//     flex: 1; padding: 20px; overflow-y: auto;
+//     .message { margin-bottom: 12px; font-size: 14px; .user { color: #1DB954; font-weight: 700; margin-right: 5px; } }
+//   }
+
+//   .input-area {
+//     padding: 20px; display: flex; background: rgba(0,0,0,0.5);
+//     input { background: transparent; border: none; color: white; flex: 1; outline: none; }
+//   }
+// }
+
+// @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }

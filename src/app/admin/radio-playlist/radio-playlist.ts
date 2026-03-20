@@ -7,7 +7,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { select, Store } from '@ngrx/store';
 import { ApiService } from '../../core/services';
-import { RadioAdminService } from '../radio-admin-service/radio-admin.service';
+import { RadioAdminService } from '../admin-services/radio-admin-service/radio-admin.service';
 import { interval } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

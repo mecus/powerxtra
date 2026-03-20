@@ -1,0 +1,98 @@
+<div class="user-edit-container">
+  <header mat-dialog-title>
+    <mat-icon>manage_accounts</mat-icon>
+    <span>Update User Permissions</span>
+  </header>
+
+  <mat-dialog-content>
+    <form [formGroup]="userForm" class="editor-layout general-form-field mat-select-library">
+
+      <!-- Profile Picture Sidebar -->
+      <aside class="avatar-sidebar">
+        <div class="avatar-wrapper">
+          <img [src]="avatarPreview()" alt="User Avatar">
+           <!-- <img src="../../../../assets/avatar.jpg" alt="User Avatar"> -->
+          <div class="upload-overlay">
+            <mat-icon>camera_alt</mat-icon>
+          </div>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Avatar URL</mat-label>
+          <input matInput formControlName="avatar" (input)="avatarPreview.set(userForm.value.avatar)">
+        </mat-form-field>
+        <div class="uid">
+          UID: {{uid()}}
+        </div>
+      </aside>
+
+      <!-- Account Details -->
+      <main class="form-fields">
+        <div class="row duo">
+          <mat-form-field appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="displayName">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input matInput formControlName="email" type="email">
+          </mat-form-field>
+        </div>
+
+        <div class="row duo">
+          <mat-form-field appearance="outline">
+            <mat-label>Account Type</mat-label>
+            <mat-select formControlName="accountType">
+              <mat-option value="admin">Administrator</mat-option>
+              <mat-option value="presenter">Presenter</mat-option>
+              <mat-option value="general">General</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Account Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="active">Active</mat-option>
+              <mat-option value="suspended">Suspended</mat-option>
+               <mat-option value="pending">Pending</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+         <div class="row-full">
+          <mat-form-field appearance="outline">
+            <mat-label>System Role</mat-label>
+            <mat-select formControlName="roles" multiple>
+              @for(role of roles(); track role){
+                <mat-option [value]="role">{{role}}</mat-option>
+              }
+              <!-- <mat-option value="admin">Administrator</mat-option>
+              <mat-option value="presenter">Presenter</mat-option>
+              <mat-option value="general">General</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>Account Status</mat-label>
+            <mat-select formControlName="status">
+              <mat-option value="active">Active</mat-option>
+              <mat-option value="suspended">Suspended</mat-option>
+               <mat-option value="pending">Pending</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+        </div>
+      </main>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()" class="cancel-btn">DISCARD</button>
+    <button mat-flat-button
+            color="primary"
+            class="save-btn"
+            [disabled]="!userForm.valid"
+            (click)="onSave()">
+      UPDATE USER
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,168 @@
+<div class="album-page">
+<div mat-dialog-title class="header">
+  <h2>Edit {{objectType}}</h2>
+  <button (click)="dialogRef.close()" matIconButton><mat-icon>close</mat-icon></button>
+</div>
+
+<mat-dialog-content>
+
+  <mat-card class="album-card general-form-field">
+
+
+
+  <form [formGroup]="albumForm">
+
+  <div class="form-grid general-form-field">
+
+  <!-- Album Name -->
+
+  <mat-form-field appearance="outline">
+  <mat-label style="text-transform: capitalize;" >{{objectType}} Name</mat-label>
+  <input matInput formControlName="name">
+  </mat-form-field>
+
+  <!-- Artist -->
+
+  <mat-form-field appearance="outline">
+  <mat-label>Artist</mat-label>
+  <input matInput formControlName="artist">
+  </mat-form-field>
+
+  <!-- Release Date -->
+
+  <mat-form-field appearance="outline">
+  <mat-label>Release Date</mat-label>
+  <input matInput [matDatepicker]="picker" formControlName="release_date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Release Year -->
+
+  <mat-form-field appearance="outline">
+  <mat-label>Release Year</mat-label>
+  <input matInput type="number" formControlName="release_year">
+  </mat-form-field>
+
+  <!-- Track Count -->
+
+  <mat-form-field appearance="outline">
+  <mat-label>Track Count</mat-label>
+  <input matInput type="number" formControlName="track_counts">
+  </mat-form-field>
+
+  <!-- Genre -->
+
+  <mat-form-field class="mat-select" appearance="outline">
+  <mat-label>Genre</mat-label>
+  <mat-select formControlName="genre">
+  @for(g of genres; track g){
+    <mat-option [value]="g">
+    {{g}}
+    </mat-option>
+  }
+
+
+  </mat-select>
+  </mat-form-field>
+
+  <!-- Category -->
+
+    <mat-form-field class="mat-select" appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        @for(c of categories; track c){
+        <mat-option [value]="c">
+      {{c}}
+      </mat-option>
+      }
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Object Type -->
+    <mat-form-field class="mat-select" appearance="outline">
+      <mat-label>Object Type</mat-label>
+      <mat-select formControlName="object">
+        @for(t of types; track t){
+        <mat-option [value]="t">
+      {{t}}
+      </mat-option>
+      }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <!-- Artwork -->
+
+  <div class="artwork-section">
+
+  <label class="upload">
+
+  <input type="file" (change)="onArtworkSelected($event)" hidden>
+
+  <div class="artwork-preview">
+
+    @if(artworkPreview){
+      <img [src]="artworkPreview">
+    }@else {
+      <mat-icon>album</mat-icon>
+    }
+
+  </div>
+
+  <p>Upload Artwork</p>
+
+  </label>
+
+  </div>
+
+
+  <!-- Tags -->
+
+  <mat-form-field appearance="outline" class="tags-field">
+
+  <mat-label>Tags</mat-label>
+  <input placeholder="Add tag" matInput formControlName="tags" >
+    <!-- <mat-chip-grid #chipGrid>
+    @for(tag of tags; track tag){
+      <mat-chip-row
+      (removed)="removeTag(tag)">
+      {{tag}}
+      <button matChipRemove>
+      <mat-icon>cancel</mat-icon>
+      </button>
+      </mat-chip-row>
+    }
+    <input placeholder="Add tag" (matChipInputTokenEnd)="addTag($event)">
+
+    </mat-chip-grid> -->
+
+  </mat-form-field>
+
+
+  <!-- Description -->
+
+  <mat-form-field appearance="outline" class="description">
+
+  <mat-label>Description</mat-label>
+
+  <textarea matInput rows="4" formControlName="description"></textarea>
+
+  </mat-form-field>
+
+
+  <div class="actions">
+
+  <button mat-raised-button color="primary" (click)="submit()">
+  Update {{objectType}}
+  </button>
+
+  </div>
+
+  </form>
+
+  </mat-card>
+</mat-dialog-content>
+
+</div>

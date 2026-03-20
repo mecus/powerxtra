@@ -1,4 +1,8 @@
+
 <div class="auth-container">
+  <div class="header">
+    <button (click)="close()" matIconButton><mat-icon>close</mat-icon></button>
+  </div>
   <mat-card class="auth-card">
     <div class="logo-container">
       <mat-icon class="brand-icon">radio</mat-icon>
@@ -44,6 +48,12 @@
       <p>{{ isLogin ? "Don't have an account?" : "Already have an account?" }}</p>
       <button mat-stroked-button (click)="toggleMode()">
         {{ isLogin ? 'SIGN UP FOR FREE' : 'LOG IN' }}
+      </button>
+    </div>
+    <div class="google-auth">
+      <p></p>
+      <button mat-stroked-button (click)="googleLogin()">
+        <img src="assets/google.png" alt=""> Continue with Google
       </button>
     </div>
   </mat-card>

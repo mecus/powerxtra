@@ -70,3 +70,11 @@ mat-form-field {
   width: 260px;
 
 }
+/* Custom Menu Styling */
+::ng-deep .dark-menu {
+  background: #282828 !important;
+  .mat-mdc-menu-item { color: white !important; }
+  .delete-btn { color: #ff5252 !important; }
+  width: 200px !important;
+}
+

@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { AlbumCreateComponent } from '../..'
 import { MatMenuModule } from "@angular/material/menu";
+import { EditAlbumt } from './edit-album/edit-album'
 
 @Component({
   selector: 'app-album-list',
@@ -85,11 +86,24 @@ export class AlbumsComponent implements OnInit {
       }
     })
   }
+  editAlbum(album){
+    this.dialog.open(EditAlbumt, {
+      data: album,
+      disableClose: true
+    }).afterClosed().subscribe((data) => {
+      console.log(data);
+      if(data.done){
+        this.ngOnInit();
+      }
+    });
+  }
 
   deleteAlbum(album: Album) {
-
     if (confirm(`Delete album "${album.name}"?`)) {
-
+      this.apiService.deleteAlbum(album._id).then((res) => {
+        console.log(res)
+        this.ngOnInit();
+      }).catch(err => console.log(err));
       // this.apiService.deleteAlbum(album.name)
 
     }

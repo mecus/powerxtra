@@ -113,33 +113,26 @@
 
 
   <!-- Tags -->
-  <!--
+
   <mat-form-field appearance="outline" class="tags-field">
 
   <mat-label>Tags</mat-label>
+  <input placeholder="Add tag" matInput formControlName="tags" >
+    <!-- <mat-chip-grid #chipGrid>
+    @for(tag of tags; track tag){
+      <mat-chip-row
+      (removed)="removeTag(tag)">
+      {{tag}}
+      <button matChipRemove>
+      <mat-icon>cancel</mat-icon>
+      </button>
+      </mat-chip-row>
+    }
+    <input placeholder="Add tag" (matChipInputTokenEnd)="addTag($event)">
 
-  <mat-chip-grid #chipGrid>
+    </mat-chip-grid> -->
 
-
-  @for(tag of tags; track tag){
-    <mat-chip-row
-    (removed)="removeTag(tag)">
-    {{tag}}
-    <button matChipRemove>
-    <mat-icon>cancel</mat-icon>
-    </button>
-    </mat-chip-row>
-  }
-
-
-  <input
-  placeholder="Add tag"
-  (matChipInputTokenEnd)="addTag($event)"
-  >
-
-  </mat-chip-grid>
-
-  </mat-form-field> -->
+  </mat-form-field>
 
 
   <!-- Description -->
@@ -156,7 +149,7 @@
   <div class="actions">
 
   <button mat-raised-button color="primary" (click)="submit()">
-  Create Album
+  Create {{objectType}}
   </button>
 
   </div>

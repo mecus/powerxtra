@@ -4,11 +4,17 @@
 // components according to the Material 3 design spec.
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
+// @use "tailwindcss";
 @use '@angular/material' as mat;
 
 $card-bg: #ffffff1a;
 $card-dark-gb: #181818;
 $spotify-green: #1db954;
+
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
 
 html {
   height: 100%;
@@ -25,6 +31,11 @@ html {
   background: rgba(18, 18, 18, 0.7); // Dark Spotify-like base
   backdrop-filter: blur(15px) saturate(180%);
   // border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.dark-dialog-panel {
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
 }
 
 body {
@@ -45,6 +56,13 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+/* Custom Menu Styling */
+::ng-deep .dark-menu {
+  background: #282828 !important;
+  .mat-mdc-menu-item { color: white !important; }
+  .delete-btn { color: #ff5252 !important; }
+  width: 200px !important;
+}
 
 @include mat.sidenav-overrides((
   container-background-color: #121212,

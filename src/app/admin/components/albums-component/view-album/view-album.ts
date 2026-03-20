@@ -11,6 +11,8 @@ import { ApiService, AppService } from '../../../../core/services';
 import { ActivatedRoute } from '@angular/router';
 import { ITrack } from '../../../../core/interfaces';
 import { MatTooltip } from "@angular/material/tooltip";
+import { MatDialog } from '@angular/material/dialog';
+import { PopupLibrary } from '../popup-library/popup-library';
 
 // import ColorThief from 'colorthief/dist/color-thief.mjs';
 // import ColorThief from 'colorthief';
@@ -33,7 +35,8 @@ export class ViewAlbum {
   constructor(
     private apiService: ApiService,
     private activeRoute: ActivatedRoute,
-    private appService: AppService
+    private appService: AppService,
+    private dislog: MatDialog
   ){}
 
 
@@ -42,6 +45,7 @@ export class ViewAlbum {
     artist: 'M83',
     artwork: 'assets/midnight-city.jpg',
     object: "EP",
+    _id: '',
     tracks: [
       // { id: '1', title: 'Intro', duration: '3:22' },
       // { id: '2', title: 'Midnight City', duration: '4:03' },
@@ -78,6 +82,18 @@ export class ViewAlbum {
       console.log(err);
     })
   }
+  addTracks(album) {
+    console.log(album)
+    this.dislog.open(PopupLibrary, {
+      data: album,
+      disableClose: true,
+    }).afterClosed().subscribe((data: any) => {
+      console.log(data);
+      if(data?.done){
+        this.getAlbum();
+      }
+    });
+  }
   removeTrack(track){
     console.log(track)
     this.appService.startSpinner("Removing track from album");
@@ -109,19 +125,23 @@ export class ViewAlbum {
 
   togglePlay(track: ITrack | any) {
     const index = this.playList.findIndex((x: any) => x._id === track._id);
-    console.log("CurrenIdx", this.currentTrackIndex)
-     console.log("TrackIdx", index)
+    // console.log("CurrenIdx", this.currentTrackIndex)
+    //  console.log("TrackIdx", index)
     this.currentTrackIndex = index;
-    if (this.activeTrackId() === track._d) {
+    if (this.activeTrackId() === track._id) {
       this.pauseTrack();
       this.isPlaying.update(v => !v);
+      this.activeTrackId.set(null);
     } else {
       this.activeTrackId.set(track._id);
       this.isPlaying.set(true);
       this.playTrack(track)
     }
   }
-
+  playAll(){
+    const track = this.playList[0];
+    this.togglePlay(track);
+  }
   // HTML alternative
   // extractDominantColor(imgElement: HTMLImageElement) {
   //   const canvas = document.createElement('canvas');

@@ -7,6 +7,10 @@ import { AlbumsComponent } from './components/albums-component/albums.component'
 import { AdminDashboard } from './admin-dashboard/admin-dashboard';
 import { ViewAlbum } from './components/albums-component/view-album/view-album';
 import { RadioPlaylist } from './radio-playlist/radio-playlist';
+import { UserList } from './user-components';
+import { ProgrammeSchedule } from './programme-schedule/programme-schedule';
+import { ListAdvert } from './advertisement/list-advert/list-advert';
+import { ListNews } from './news-container/list-news/list-news';
 
 export const AdminRoutes: Routes = [
   {
@@ -18,6 +22,10 @@ export const AdminRoutes: Routes = [
   { path: 'albums', component: AlbumsComponent },
   // { path: 'create_album', component: AlbumCreateComponent },
   { path: 'albums/details/:id', component: ViewAlbum },
-  { path: 'radio_playlist', component: RadioPlaylist }
+  { path: 'radio_playlist', component: RadioPlaylist },
+  { path: 'users', component: UserList },
+  { path: 'programme_schedule', component: ProgrammeSchedule },
+  { path: 'adverts', component: ListAdvert },
+  { path: 'news', component: ListNews }
 
 ]

@@ -4,7 +4,52 @@
         PowerXtra
       </div>
       <div class="live-radio">
-        <button (click)="startLiveRadio()" routerLinkActive="active" matButton="outlined"> <mat-icon>cell_tower</mat-icon> Live Radio</button>
+        <!-- [matRippleColor]="'#1DB954'" -->
+         @if(mediaState().media == 'live'){
+          <div matRipple  class="radio-state" routerLink="/live">
+            @if(isPlaying()){
+            <div class="equalizer">
+              <span></span><span></span><span></span>
+            </div>
+            }@else{
+              <mat-icon>play_arrow</mat-icon>
+              <!-- <mat-icon>cell_tower</mat-icon> -->
+            }
+            <p>Live Radio</p>
+          </div>
+         }@else {
+          <div matRipple  class="radio-state" routerLink="/autodj">
+            @if(isPlaying()){
+            <div class="equalizer">
+              <span></span><span></span><span></span>
+            </div>
+            }@else{
+              <!-- <mat-icon>cell_tower</mat-icon> -->
+               <mat-icon>play_arrow</mat-icon>
+            }
+            <p>Live Radio</p>
+          </div>
+         }
+
+
+        <!-- @if(mediaState().media == 'live'){
+         <button routerLink="/live" routerLinkActive="active" matButton="outlined">
+           <mat-icon>cell_tower</mat-icon>
+          <div class="equalizer">
+            <span></span><span></span><span></span>
+          </div>
+          Live Radio</button>
+        }@else if(mediaState().media == 'autoDJ'){
+          <button class="radioBtn" routerLink="/autodj" routerLinkActive="active" matButton="outlined">
+            <mat-icon>cell_tower</mat-icon>
+          <span class="equalizer">
+            <span></span><span></span><span></span>
+          </span>
+            Live Auto DJ</button>
+        } -->
+
+
+
       </div>
       <nav>
 
@@ -12,6 +57,8 @@
           <mat-icon>home</mat-icon> Home</a>
         <a routerLink="/search" routerLinkActive="active">
           <mat-icon>search</mat-icon> Search</a>
+        <a routerLink="/programmes" routerLinkActive="active">
+          <mat-icon>drag_indicator</mat-icon> Programme Schedule</a>
         <a routerLink="/podcasts" routerLinkActive="active">
           <mat-icon>podcasts</mat-icon> Podcasts</a>
         <a routerLink="/lifestyle" routerLinkActive="active">
@@ -24,12 +71,17 @@
           <mat-icon>playlist_add</mat-icon> Create Playlist</a>
       </nav>
 
-      <nav>
-        <h3>Admin</h3>
-        <a routerLink="/admin" routerLinkActive="active">Admin Dashboard</a>
-        <a routerLink="/admin/upload_studio" routerLinkActive="active">Upload Studio</a>
-         <a routerLink="/admin/library" routerLinkActive="active">Music Library</a>
-        <a routerLink="/presenter" routerLinkActive="active">Presenter Studio</a>
-        <a routerLink="/analytics" routerLinkActive="active">Analytics</a>
-      </nav>
+      @if(isAdmin()){
+        <nav>
+          <h3>Admin</h3>
+          <a routerLink="/admin" routerLinkActive="active">
+             <mat-icon>dashboard</mat-icon> Admin Dashboard</a>
+          <!-- <a routerLink="/admin/upload_studio" routerLinkActive="active">Upload Studio</a>
+          <a routerLink="/admin/library" routerLinkActive="active">Music Library</a> -->
+          <a routerLink="/presenters" routerLinkActive="active">
+             <mat-icon>mic</mat-icon> Presenter Studio</a>
+          <!-- <a routerLink="/analytics" routerLinkActive="active">Analytics</a> -->
+        </nav>
+      }
+
     </aside>

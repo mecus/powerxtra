@@ -3,3 +3,4 @@ export { MusicLibraryComponent } from './music-library-component/music-library.c
 export { AlbumCreateComponent } from './components/albums-component/album-create-component/album-create-component';
 export { AdminRoutes } from './admin.routes';
 export { RadioPlaylist } from './radio-playlist/radio-playlist';
+export { ProgrammeSchedule } from './programme-schedule/programme-schedule';

@@ -1,0 +1,84 @@
+<div class="details-container">
+  <!-- Dynamic Header with Artwork -->
+  <header class="hero-section">
+    <img [src]="data.artwork || 'assets/default-show.jpg'" alt="Programme Art" class="hero-art">
+    <div class="hero-overlay">
+      <div class="badge-row">
+        <span class="category-tag">{{ data.category }}</span>
+        @if (isLive()) {
+          <span class="live-pulse">● LIVE ON AIR</span>
+        }
+      </div>
+      <h1>{{ data.title }}</h1>
+      <p class="presenter-name">Hosted by <span>{{ data.presenter }}</span></p>
+    </div>
+    <button mat-icon-button class="close-btn" (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content>
+    <div class="info-grid">
+      <!-- Inside .info-grid -->
+      <section class="live-stats-row">
+        <div class="stat-card listener-stat">
+          <mat-icon>groups</mat-icon>
+          <div class="stat-text">
+            <label>Active Listeners</label>
+            <p>{{ listenerCount() | number }}</p>
+          </div>
+        </div>
+
+        <div class="stat-card countdown-stat" [class.is-live]="data.active">
+          <mat-icon>{{ data.active ? 'sensors' : 'timer' }}</mat-icon>
+          <div class="stat-text">
+            <label>{{ data.active ? 'Current Status' : 'Starts In' }}</label>
+            <p>{{ countdown() }}</p>
+          </div>
+        </div>
+      </section>
+      <!-- Schedule Info -->
+      <section class="meta-section">
+        <div class="meta-item">
+          <mat-icon>schedule</mat-icon>
+          <div class="text">
+            <label>Broadcast Time</label>
+            <p>{{ data.startTime | date: 'hh:mm'}} — {{ data.endTime  | date: 'hh:mm' }}</p>
+          </div>
+        </div>
+
+        <div class="meta-item">
+          <mat-icon>event</mat-icon>
+          <div class="text">
+            <label>Occurrence</label>
+            <p>Daily Broadcast</p>
+          </div>
+        </div>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Description / Notes -->
+      <section class="description">
+        <label>Programme Description</label>
+        <p>
+          {{ data.description || 'Join ' + data.presenter + ' for the best ' + data.category + ' hits. This programme is part of the RadioSkin daily rotation.' }}
+        </p>
+      </section>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <!-- <button mat-button class="delete-btn">
+      <mat-icon>delete_outline</mat-icon>
+      REMOVE
+    </button> -->
+    <div class="spacer"></div>
+    <button mat-stroked-button (click)="dialogRef.close()">CLOSE</button>
+    <button mat-flat-button color="primary" class="edit-btn" (click)="switchToEdit()">
+      <mat-icon>edit</mat-icon>
+      EDIT SCHEDULE
+    </button>
+  </mat-dialog-actions>
+</div>
+

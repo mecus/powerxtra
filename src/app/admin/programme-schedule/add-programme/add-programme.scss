@@ -1,0 +1,85 @@
+.dialog-container {
+  background: #181818;
+  color: white;
+  padding: 10px;
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    font-size: 22px;
+    color: #1DB954; /* Spotify Green */
+    margin-bottom: 20px;
+  }
+}
+.artwork-upload {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+
+  .preview-box {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    background: #282828;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #444;
+    overflow: hidden;
+
+    img { width: 100%; height: 100%; object-fit: cover; }
+    mat-icon { font-size: 40px; width: 40px; height: 40px; color: #666; }
+    span { font-size: 10px; color: #666; text-transform: uppercase; margin-top: 5px; }
+
+    &.has-image { border: none; }
+  }
+
+  .upload-trigger {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: transparent !important;
+    // background-color: #1DB954 !important; /* Spotify Green */
+  }
+}
+
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row.duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.full-width { width: 100%; }
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background: #282828 !important;
+}
+
+.save-btn {
+  background-color: #1DB954 !important;
+  color: black !important;
+  font-weight: bold !important;
+  border-radius: 500px !important;
+}
+
+.cancel-btn {
+  color: #b3b3b3 !important;
+}
+
+/* Style the popup timepicker panel */
+::ng-deep .mat-timepicker-content {
+  background-color: #282828 !important;
+  color: white !important;
+  .mat-timepicker-button { color: #1DB954 !important; }
+}

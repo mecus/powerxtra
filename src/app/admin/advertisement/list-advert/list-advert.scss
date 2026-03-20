@@ -1,0 +1,112 @@
+.adverts-container {
+  background-color: #0e0e0e;
+  color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h2 {
+      color: #ff4081; // Radio pink accent
+    }
+
+    button {
+      color: #fff;
+    }
+  }
+
+  mat-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+
+    .advert-info {
+      h3 {
+        margin: 0;
+        color: #ff4081;
+      }
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #ccc;
+      }
+    }
+
+    .advert-actions {
+      button {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .empty {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+  }
+}
+
+/* Angular Material theme overrides */
+.mat-flat-button {
+  background-color: #ff4081; // Radio accent color
+}
+
+.mat-icon {
+  color: #fff;
+  font-size: 18px;
+}
+.active{
+  background-color: #1DB954;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+.inactive{
+  background-color: #ff4081;
+  border-radius: 20px;
+  text-align: center;
+}
+.adverts{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  mat-card{
+    width: 300px;
+    background-color: #1a1a1a;
+    h3, p{
+      // color: #1a1a1a;
+      margin: 0;
+    }
+    h3{
+      padding: 10px 0px;
+    }
+    .advert-actions{
+      display: flex;
+      justify-content: flex-end;
+      button{
+        color: #1a1a1a;
+      }
+    }
+    transition: transform 0.5s;
+    &:hover { transform: translateY(10px); background: #282828 !important; }
+  }
+  .audio-section{
+    padding: 20px;
+    text-align: center;
+    audio{
+      width: 250px;
+      background-color: #1a1a1a !important;
+      background: transparent !important;
+    }
+  }
+}

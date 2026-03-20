@@ -82,13 +82,13 @@ export class AddTrackComponent {
       this.dialogRef.close({
         // album: this.selectedAlbum(),
         // tracks: this.selectedTracks
-        list: this.matTracks(),
+        list: this.mapTracks(),
         album: this.selectedAlbum()
       });
     }
   }
 
-  matTracks(){
+  mapTracks(){
     // [ {track_id: string, album_id: string, album: string}
     const tracks: Array<any> = this.selectedTracks;
     const album = this.selectedAlbum();
